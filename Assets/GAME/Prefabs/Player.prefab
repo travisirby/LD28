@@ -30,7 +30,6 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
-  - 114: {fileID: 11400012}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -48,9 +47,12 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400000}
   - 61: {fileID: 6100002}
-  m_Layer: 9
+  - 50: {fileID: 5000002}
+  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400012}
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -135,6 +137,21 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!50 &5000002
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -169,6 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 400012}
+  smoothRotate: 0
+  rotationSpeed: 0
   followRate: 4
 --- !u!114 &11400002
 MonoBehaviour:
@@ -191,7 +210,7 @@ MonoBehaviour:
     slopeClimbForce: 50
     slopeLimit: .800000012
   jumpProps:
-    jumpForce: {x: 0, y: 800}
+    jumpForce: {x: 0, y: 600}
     jumpLeniancy: .170000002
     landingSlideAmount: 20
     landingSlideYForce: 20
@@ -256,13 +275,24 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
+  m_GameObject: {fileID: 100014}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe744c227face49e48d516f8710ddc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harpoonPrefab: {fileID: 100002, guid: 22d003500a530481f82d8726484ff2d7, type: 2}
+  harpoonPrefab: {fileID: 100004, guid: 22d003500a530481f82d8726484ff2d7, type: 2}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe0fade41ffc4c98a718a28b093484c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -4,6 +4,8 @@ using System.Collections;
 public class SmoothFollowPlayer : MonoBehaviour {
 	
 	public Transform target;
+	public bool smoothRotate;
+	public float rotationSpeed;
 	[Range(0.1f, 20f)] public float followRate = 10;
 
 	Transform thisTransform;
@@ -46,6 +48,11 @@ public class SmoothFollowPlayer : MonoBehaviour {
 			thisOldPosY = transform.position.y;
 			targetOldPosX = target.position.x;
 			targetOldPosY = target.position.y;
+
+			if (smoothRotate)
+			{
+				transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, Time.deltaTime * rotationSpeed);
+			}
 		}
 	}
 

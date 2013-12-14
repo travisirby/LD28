@@ -8,7 +8,6 @@ public class HarpoonThrow : MonoBehaviour {
 	[System.NonSerialized]
 	public bool throwingHarpoon;
 
-	private HarpoonDetector harpoonDetector;
 	private bool isReady, isThisMyObject;
 
 	void Awake()
@@ -26,19 +25,14 @@ public class HarpoonThrow : MonoBehaviour {
 
 	void SetIsReady () { isReady = true; }
 
-	void SetupHarpoonDetector(HarpoonDetector hD)
-	{
-		harpoonDetector = hD;
-	}
-
 	void Update ()
 	{
-		if (harpoonDetector == null) return;
+		if (transform.parent == null) return;
 
-		if(Input.GetMouseButtonDown(0) && isReady && isThisMyObject && harpoonDetector.holdingHarpoon)
+		if(Input.GetMouseButtonDown(0) && isReady && isThisMyObject && !throwingHarpoon)
 		{
 			throwingHarpoon = true;
-			harpoonDetector.holdingHarpoon = false;
+			transform.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);
 			Invoke ("ResetThrowingHarpoon", 3f);
 
 			Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -60,23 +54,8 @@ public class HarpoonThrow : MonoBehaviour {
 
 	void ResetThrowingHarpoon () { throwingHarpoon = false; }
 
-//	void OnTriggerEnter2D (Collider2D col)
-//	{
-//
-//		if (col.CompareTag("Player"))
-//		{
-//			if (isThisMyObject && !holdingHarpoon && !throwingHarpoon)
-//			{
-//				Debug.Log("mine");
-//				holdingHarpoon = true;
-//				transform.parent = col.transform;
-//				transform.localPosition = Vector3.zero;
-//				transform.rotation = Quaternion.identity;
-//			}
-//			else if (!isThisMyObject)
-//			{
-//				Debug.Log("hit");
-//			}
-//		}
-//	}
+	void OnCollisionEnter2D (Collision2D col)
+	{
+		rigidbody2D.velocity = Vector2.zero;
+	}
 }
