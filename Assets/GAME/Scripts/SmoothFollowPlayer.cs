@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SmoothFollow : MonoBehaviour {
+public class SmoothFollowPlayer : MonoBehaviour {
 	
 	public Transform target;
 	[Range(0.1f, 20f)] public float followRate = 10;
@@ -10,9 +10,14 @@ public class SmoothFollow : MonoBehaviour {
 	bool isReady;
 	float thisOldPosX, thisOldPosY, targetOldPosX, targetOldPosY; 
 
-	void Start ()
+	void Awake ()
 	{
 		thisTransform = transform;
+	}
+	
+	void SetupPlayerCam (Transform trans)
+	{
+		target = trans;
 		Invoke("Ready",1f);
 	}
 

@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Cinch2D;
 
-namespace Cinch2D
-{
 	[System.Serializable]
 	public class MovementProperties		// These classes keep the Unity inspector more organized
 	{
@@ -29,7 +26,7 @@ namespace Cinch2D
 		public float jumpCheckTime = 0.5f;
 	}
 
-	public class Cinch2DController : MonoBehaviour 
+	public class PlayerController : MonoBehaviour 
 	{		
 
 		public MovementProperties movementProps;
@@ -107,8 +104,8 @@ namespace Cinch2D
 				grounded = CheckIfGrounded ();
 				//AnimatorStateInfo currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
 
-				if (grounded)
-				{
+//				if (grounded)
+//				{
 					//animator.SetBool(animHashIDs.grounded, true);
 	//				if (currentAnimState.nameHash == animHashIDs.fallState && !crossFadingLanding)
 	//				{
@@ -133,9 +130,9 @@ namespace Cinch2D
 					}
 
 					groundedDelayCheck = true;			// groundedDelayCheck is used to allow a forgiving delayed jump
-				}
-				else // not grounded
-				{
+//				}
+//				else // not grounded
+//				{
 	//				if (currentAnimState.nameHash != animHashIDs.fallState && !isJumping && !crossFadingFalling)
 	//				{
 	//					CancelInvoke ("ResetCrossFadingFalling");
@@ -144,15 +141,15 @@ namespace Cinch2D
 	//					Invoke ("ResetCrossFadingFalling",0.15f);
 	//				}
 					//animator.SetBool(animHashIDs.grounded, false);
-					speedMode = movementProps.airMoveSpeed;
-					slope = 0f;
-
-					if (groundedDelayCheck && !groundedDelayCheckReset)			// Reset groundedDelayCheck (used for forgiving jumps)
-					{
-						groundedDelayCheckReset = true;
-						Invoke("GroundedDelayCheckReset", jumpProps.jumpCheckTime);	
-					}
-				}
+//					speedMode = movementProps.airMoveSpeed;
+//					slope = 0f;
+//
+//					if (groundedDelayCheck && !groundedDelayCheckReset)			// Reset groundedDelayCheck (used for forgiving jumps)
+//					{
+//						groundedDelayCheckReset = true;
+//						Invoke("GroundedDelayCheckReset", jumpProps.jumpCheckTime);	
+//					}
+//				}
 
 
 				// Moving platform support
@@ -352,4 +349,3 @@ namespace Cinch2D
 			
 		}
 	}
-}
