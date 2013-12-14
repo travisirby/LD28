@@ -1,15 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TNet/Client/TNSyncRigidbody2D.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ThrowHarpoon.cs">
     <Files>
-      <File FileName="Assets/SetupPlayerCam.cs" Line="18" Column="27" />
-      <File FileName="Assets/TNet/Client/TNSyncRigidbody2D.cs" Line="88" Column="20" />
+      <File FileName="Assets/TNet/Client/TNSyncRigidbody2D.cs" Line="1" Column="1" />
       <File FileName="../game-off-2013/Assets/Scripts/Text_Restart.cs" Line="1" Column="1" />
-      <File FileName="Assets/ExitChannel.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Controller/SmoothFollowPlayer.cs" Line="20" Column="18" />
-      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="19" Column="81" />
-      <File FileName="Assets/GAME/Controller/SmoothFollow.cs" Line="4" Column="26" />
-      <File FileName="Assets/GAME/Controller/Cinch2DController.cs" Line="66" Column="5" />
+      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="54" Column="1" />
+      <File FileName="Assets/ThrowHarpoon.cs" Line="23" Column="146" />
+      <File FileName="Assets/GameManager.cs" Line="18" Column="111" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

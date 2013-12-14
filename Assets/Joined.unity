@@ -293,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 539022711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.7430439, y: 22.1863003, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 1269496196}
   m_Father: {fileID: 0}
@@ -461,6 +461,14 @@ Prefab:
     - target: {fileID: 400000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
+      propertyPath: m_Name
+      value: _CloseChannelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
@@ -1206,6 +1214,14 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
     - {fileID: 5000000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
@@ -1228,12 +1244,12 @@ GameObject:
   - 61: {fileID: 2057163120}
   - 114: {fileID: 2057163119}
   m_Layer: 0
-  m_Name: Cube2D
+  m_Name: _CloseChannelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2057163119
 MonoBehaviour:
   m_ObjectHideFlags: 0
