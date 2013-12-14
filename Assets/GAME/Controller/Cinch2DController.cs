@@ -50,32 +50,46 @@ namespace Cinch2D
 		private bool grounded, groundedDelayCheck, groundedDelayCheckReset; 
 		private bool isJumping, isJumpingDelayed, isOnMovingPlatform, hInputActivated;
 
+		private bool isThisMyObject;
+
+		void Awake ()
+		{
+			if (TNManager.isThisMyObject)
+			{
+				isThisMyObject = true;
+			}
+		}
 		void Start()
 		{
-			rb2D = rigidbody2D;															// Cache rigidbody2D for performance reasons
+			if (isThisMyObject)
+			{
+				rb2D = rigidbody2D;															// Cache rigidbody2D for performance reasons
+		//		animator = transform.Find ("Boy").gameObject.GetComponent<Animator>();		// Get Boy's Animator to change animations
+		//		animHashIDs = transform.Find("Boy").gameObject.GetComponent<AnimHashIDs>();
 
-	//		animator = transform.Find ("Boy").gameObject.GetComponent<Animator>();		// Get Boy's Animator to change animations
-	//		animHashIDs = transform.Find("Boy").gameObject.GetComponent<AnimHashIDs>();
+				groundCasts = transform.Find ("GroundCasts");								// Find our groundCasts child gameobject
 
-			groundCasts = transform.Find ("GroundCasts");								// Find our groundCasts child gameobject
-
-			groundCastChilds = new Transform[groundCasts.childCount];	// Create a Transform array and find all groundCasts children 
-			for (int i=0; i < groundCastChilds.Length; i++)				// Used for linecasting to see if we are grounded
-				groundCastChilds[i] = groundCasts.GetChild(i);
+				groundCastChilds = new Transform[groundCasts.childCount];	// Create a Transform array and find all groundCasts children 
+				for (int i=0; i < groundCastChilds.Length; i++)				// Used for linecasting to see if we are grounded
+					groundCastChilds[i] = groundCasts.GetChild(i);
+			}
 		}
 
 		void Update()
 		{	
-			JumpSetup ();
-
-			//get horizontal input
-			hInput = Input.GetAxisRaw ("Horizontal");
-
-			if (Mathf.Approximately(Mathf.Abs (hInput), 1f) && !hInputActivated)		// SlideCheck() Activates when HInputActivated is false
+			if (isThisMyObject)
 			{
-				hInputActivated = true;
-				CancelInvoke("ResetHInputActivated");
-				Invoke("ResetHInputActivated", 0.2f);
+				JumpSetup ();
+
+				//get horizontal input
+				hInput = Input.GetAxisRaw ("Horizontal");
+
+				if (Mathf.Approximately(Mathf.Abs (hInput), 1f) && !hInputActivated)		// SlideCheck() Activates when HInputActivated is false
+				{
+					hInputActivated = true;
+					CancelInvoke("ResetHInputActivated");
+					Invoke("ResetHInputActivated", 0.2f);
+				}
 			}
 		}
 
@@ -86,85 +100,89 @@ namespace Cinch2D
 
 		void FixedUpdate() 
 		{
-			// grounded test
-			grounded = CheckIfGrounded ();
-			//AnimatorStateInfo currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
-
-			if (grounded)
+			if (isThisMyObject)
 			{
-				//animator.SetBool(animHashIDs.grounded, true);
-//				if (currentAnimState.nameHash == animHashIDs.fallState && !crossFadingLanding)
-//				{
-//					CancelInvoke ("ResetCrossFadingLanding");
-//					crossFadingLanding = true;
-//					//animator.CrossFade (animHashIDs.landState,0.05f,0,Time.deltaTime);
-//					Invoke ("ResetCrossFadingLanding",0.15f);
-//				}
-				speedMode = movementProps.moveSpeed;
+				// grounded test
+				grounded = CheckIfGrounded ();
+				//AnimatorStateInfo currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
 
-				if (isJumpingDelayed)		// If we have just landed from a jump
+				if (grounded)
 				{
-		
-					if (Mathf.Abs (hInput) > 0.5f)		// If the player is applying hInput, add force in the jump direction
-						rb2D.AddForce(new Vector2 (jumpProps.landingSlideAmount * hInput, groundLinecast.normal.x * jumpProps.landingSlideYForce));
+					//animator.SetBool(animHashIDs.grounded, true);
+	//				if (currentAnimState.nameHash == animHashIDs.fallState && !crossFadingLanding)
+	//				{
+	//					CancelInvoke ("ResetCrossFadingLanding");
+	//					crossFadingLanding = true;
+	//					//animator.CrossFade (animHashIDs.landState,0.05f,0,Time.deltaTime);
+	//					Invoke ("ResetCrossFadingLanding",0.15f);
+	//				}
+					speedMode = movementProps.moveSpeed;
 
-					// Reset jump bool variables
-					isJumping = false;
-					isJumpingDelayed = false;
+					if (isJumpingDelayed)		// If we have just landed from a jump
+					{
+			
+						if (Mathf.Abs (hInput) > 0.5f)		// If the player is applying hInput, add force in the jump direction
+							rb2D.AddForce(new Vector2 (jumpProps.landingSlideAmount * hInput, groundLinecast.normal.x * jumpProps.landingSlideYForce));
+
+						// Reset jump bool variables
+						isJumping = false;
+						isJumpingDelayed = false;
+					}
+
+					groundedDelayCheck = true;			// groundedDelayCheck is used to allow a forgiving delayed jump
+				}
+				else // not grounded
+				{
+	//				if (currentAnimState.nameHash != animHashIDs.fallState && !isJumping && !crossFadingFalling)
+	//				{
+	//					CancelInvoke ("ResetCrossFadingFalling");
+	//					crossFadingFalling = true;
+	//					//animator.CrossFade (animHashIDs.fallState,0.1f,0,Time.deltaTime);
+	//					Invoke ("ResetCrossFadingFalling",0.15f);
+	//				}
+					//animator.SetBool(animHashIDs.grounded, false);
+					speedMode = movementProps.airMoveSpeed;
+					slope = 0f;
+
+					if (groundedDelayCheck && !groundedDelayCheckReset)			// Reset groundedDelayCheck (used for forgiving jumps)
+					{
+						groundedDelayCheckReset = true;
+						Invoke("GroundedDelayCheckReset", jumpProps.jumpCheckTime);	
+					}
 				}
 
-				groundedDelayCheck = true;			// groundedDelayCheck is used to allow a forgiving delayed jump
-			}
-			else // not grounded
-			{
-//				if (currentAnimState.nameHash != animHashIDs.fallState && !isJumping && !crossFadingFalling)
-//				{
-//					CancelInvoke ("ResetCrossFadingFalling");
-//					crossFadingFalling = true;
-//					//animator.CrossFade (animHashIDs.fallState,0.1f,0,Time.deltaTime);
-//					Invoke ("ResetCrossFadingFalling",0.15f);
-//				}
-				//animator.SetBool(animHashIDs.grounded, false);
-				speedMode = movementProps.airMoveSpeed;
-				slope = 0f;
 
-				if (groundedDelayCheck && !groundedDelayCheckReset)			// Reset groundedDelayCheck (used for forgiving jumps)
+				// Moving platform support
+				Vector2 movingPlatformSpeed = Vector2.zero;
+				if (grounded)
 				{
-					groundedDelayCheckReset = true;
-					Invoke("GroundedDelayCheckReset", jumpProps.jumpCheckTime);	
-				}
-			}
+					if (groundLinecast.transform.CompareTag("MovingPlatform"))
+					{
+						isOnMovingPlatform = true;
+						movingPlatformSpeed = groundLinecast.transform.rigidbody2D.velocity;
+						Vector2 newVel = new Vector2(movingPlatformSpeed.x * movementProps.movingPlatformFriction * Time.deltaTime, 0f);
+						rb2D.velocity = new Vector2 (newVel.x, rb2D.velocity.y);
 
-			// Moving platform support
-			Vector2 movingPlatformSpeed = Vector2.zero;
-			if (grounded)
-			{
-				if (groundLinecast.transform.CompareTag("MovingPlatform"))
-				{
-					isOnMovingPlatform = true;
-					movingPlatformSpeed = groundLinecast.transform.rigidbody2D.velocity;
-					Vector2 newVel = new Vector2(movingPlatformSpeed.x * movementProps.movingPlatformFriction * Time.deltaTime, 0f);
-					rb2D.velocity = new Vector2 (newVel.x, rb2D.velocity.y);
+					}
+					else
+						isOnMovingPlatform = false;
 
 				}
-				else
-					isOnMovingPlatform = false;
 
+
+				float moveTo = transform.position.x + hInput;
+
+				Move (moveTo, speedMode, slope,  0.7f);	// Tested stopDistance, 0.7f is the best
+
+				if (!isJumpingDelayed) 
+					LimitSpeed (movementProps.maxSpeedXGround + movingPlatformSpeed.magnitude, movementProps.maxSpeedY);
+				else 
+					LimitSpeed (movementProps.maxSpeedXAir + movingPlatformSpeed.magnitude, movementProps.maxSpeedY);
+
+				if (!hInputActivated) SlideCheck();
+
+				RotateToGround();
 			}
-
-
-			float moveTo = transform.position.x + hInput;
-
-			Move (moveTo, speedMode, slope,  0.7f);	// Tested stopDistance, 0.7f is the best
-
-			if (!isJumpingDelayed) 
-				LimitSpeed (movementProps.maxSpeedXGround + movingPlatformSpeed.magnitude, movementProps.maxSpeedY);
-			else 
-				LimitSpeed (movementProps.maxSpeedXAir + movingPlatformSpeed.magnitude, movementProps.maxSpeedY);
-
-			if (!hInputActivated) SlideCheck();
-
-			RotateToGround();	
 		}
 
 		void ResetHInputActivated () { hInputActivated = false; }
