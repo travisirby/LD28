@@ -47,6 +47,7 @@ using System.Collections;
 
 		private bool isThisMyObject;
 		private TNSyncPlayer tnSyncPlayer;
+
 		void Awake ()
 		{
 			if (TNManager.isThisMyObject)

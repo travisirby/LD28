@@ -519,6 +519,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0f83edb0ab0cd4e26a7a43731988ea6e, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85c87ff93e7b1c44889e1ffa480914e4, type: 2}
     m_RemovedComponents:
     - {fileID: 6100000, guid: 0f83edb0ab0cd4e26a7a43731988ea6e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0f83edb0ab0cd4e26a7a43731988ea6e, type: 2}
@@ -1096,7 +1100,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1361,7 +1365,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 85c87ff93e7b1c44889e1ffa480914e4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
