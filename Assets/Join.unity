@@ -494,7 +494,7 @@ MonoBehaviour:
   firstLevel: Joined
   channelID: 5
   disconnectLevel: Join
-  allowUDP: 0
+  allowUDP: 1
   connectOnStart: 1
   successFunctionName: 
   failureFunctionName: AutoJoinError
@@ -510,5 +510,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects:
-  - {fileID: 100002, guid: c3da83c71f01d7842aea5eb0d65d9a09, type: 2}
-  - {fileID: 100008, guid: 5a7be9e6d14b34b9686c6707fbdd89ee, type: 2}
+  - {fileID: 100000, guid: fb555b226f70045c680b3247de45a6fe, type: 2}
+  - {fileID: 100002, guid: 5a7be9e6d14b34b9686c6707fbdd89ee, type: 2}

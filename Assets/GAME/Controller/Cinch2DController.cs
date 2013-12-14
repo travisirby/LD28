@@ -51,12 +51,13 @@ namespace Cinch2D
 		private bool isJumping, isJumpingDelayed, isOnMovingPlatform, hInputActivated;
 
 		private bool isThisMyObject;
-
+		private TNSyncPlayer tnSyncPlayer;
 		void Awake ()
 		{
 			if (TNManager.isThisMyObject)
 			{
 				isThisMyObject = true;
+				tnSyncPlayer = GetComponent<TNSyncPlayer>();
 			}
 		}
 		void Start()
@@ -121,9 +122,11 @@ namespace Cinch2D
 					if (isJumpingDelayed)		// If we have just landed from a jump
 					{
 			
-						if (Mathf.Abs (hInput) > 0.5f)		// If the player is applying hInput, add force in the jump direction
+						if (Mathf.Abs (hInput) > 0.5f) // If the player is applying hInput, add force in the jump direction
+						{
 							rb2D.AddForce(new Vector2 (jumpProps.landingSlideAmount * hInput, groundLinecast.normal.x * jumpProps.landingSlideYForce));
-
+							tnSyncPlayer.Sync();
+						}
 						// Reset jump bool variables
 						isJumping = false;
 						isJumpingDelayed = false;
@@ -179,9 +182,9 @@ namespace Cinch2D
 				else 
 					LimitSpeed (movementProps.maxSpeedXAir + movingPlatformSpeed.magnitude, movementProps.maxSpeedY);
 
-				if (!hInputActivated) SlideCheck();
+	//			if (!hInputActivated) SlideCheck();
 
-				RotateToGround();
+				//RotateToGround();
 			}
 		}
 
@@ -228,7 +231,10 @@ namespace Cinch2D
 		     Vector2 moveForce = new Vector2 (moveForceX, Mathf.Abs(tempSlope * movementProps.slopeClimbForce));
 		     
 		     if (Mathf.Abs (relativePosition) > stopDistance)
+			{
 		     	rb2D.AddForce(moveForce);
+				tnSyncPlayer.Sync();
+			}
 		}
 		
 		//jumping
@@ -249,6 +255,7 @@ namespace Cinch2D
 						groundedDelayCheck = false;
 						groundedDelayCheckReset = false;
 						Jump (jumpProps.jumpForce);
+
 					}
 				}
 			}
@@ -274,6 +281,7 @@ namespace Cinch2D
 			}
 
 			rb2D.AddForce(jumpVelocity);
+			tnSyncPlayer.Sync();
 			jumpTime = 0f;
 			Invoke("SetIsJumpingDelayed", 0.2f);
 		}
