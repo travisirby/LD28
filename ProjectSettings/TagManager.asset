@@ -3,6 +3,15 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - MovingPlatform
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -12,8 +21,8 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
+  User Layer 8: Ground
+  User Layer 9: Player
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 

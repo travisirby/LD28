@@ -2,6 +2,10 @@
 /obj
 /library
 Assets/TNet
+Assets/TNet.meta
+Assets/PlayModePersist
+Assets/PlayModePersist.meta
+
 *.csproj
 *.unityproj
 *.sln
