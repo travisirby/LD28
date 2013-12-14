@@ -1,0 +1,7 @@
+/Temp
+/obj
+/library
+Assets/TNet
+*.csproj
+*.unityproj
+*.sln
