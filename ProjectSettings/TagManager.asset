@@ -50,3 +50,7 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: PlayerSprite
+    userID: 1
+    uniqueID: 767919059
+    locked: 0

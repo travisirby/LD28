@@ -1,0 +1,7 @@
+<TextureAtlas imagePath="sheet.png">
+	<SubTexture name="arm.png" x="269" y="94" width="75" height="114"/>
+	<SubTexture name="harpoon.png" x="0" y="0" width="495" height="88"/>
+	<SubTexture name="head.png" x="138" y="94" width="125" height="137"/>
+	<SubTexture name="leg.png" x="350" y="94" width="67" height="90"/>
+	<SubTexture name="torso.png" x="0" y="94" width="132" height="114"/>
+</TextureAtlas>
