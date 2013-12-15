@@ -3,7 +3,10 @@ using System.Collections;
 
 public class HarpoonDetector : MonoBehaviour {
 
+	public int harpoonOwnedLayer = 12;
+
 	private bool isThisMyObject, holdingHarpoon, throwingHarpoon;
+	private Transform harpoon;
 
 	void Awake()
 	{
@@ -12,6 +15,7 @@ public class HarpoonDetector : MonoBehaviour {
 			isThisMyObject = true;
 		}
 	}
+	
 
 	void ThrewHarpoon ()
 	{
@@ -26,18 +30,21 @@ public class HarpoonDetector : MonoBehaviour {
 	{
 		if (col.CompareTag("Harpoon"))
 		{
-			if (isThisMyObject && !holdingHarpoon && !throwingHarpoon)
+			if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
 			{
-				Debug.Log("mine");
 				holdingHarpoon = true;
-				col.transform.parent = transform;
-				col.transform.localPosition = Vector3.zero;
-				col.transform.rotation = Quaternion.identity;
+
+				harpoon = col.transform;
+				harpoon.SendMessage ("SetOwner", TNManager.playerID);
+				col.gameObject.layer = harpoonOwnedLayer; 
+				col.transform.parent.transform.parent = transform;
+				col.transform.position = transform.position;
+				col.transform.parent.rotation = Quaternion.identity;
 			}
-			else if (!isThisMyObject)
-			{
-				Debug.Log("hit");
-			}
+//			else if (!isThisMyObject)
+//			{
+//			}
 		}
 	}
+
 }

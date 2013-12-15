@@ -188,7 +188,7 @@ MonoBehaviour:
   target: {fileID: 400012}
   smoothRotate: 0
   rotationSpeed: 0
-  followRate: 4
+  followRate: 5
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7d0c677efbe48f984cdaa2f0f349d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatesPerSecond: 5
+  updatesPerSecond: 4
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe0fade41ffc4c98a718a28b093484c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  harpoonOwnedLayer: 12
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -20,7 +20,7 @@ public class SmoothFollowPlayer : MonoBehaviour {
 	void SetupPlayerCam (Transform trans)
 	{
 		target = trans;
-		Invoke("Ready",1f);
+		Invoke("Ready",0.1f);
 	}
 
 	void Ready ()
