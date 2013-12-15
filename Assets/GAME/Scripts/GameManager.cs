@@ -1,10 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using TNet;
 
 public class GameManager : Singleton<GameManager> {
 
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
+
+	public Dictionary<int, Transform> playersDict = new Dictionary<int, Transform>();
+
+	private GameObject[] playersArray;
+
+	void Start ()
+	{
+		AddPlayersToDict();
+	}
+
+	public void AddPlayersToDict ()
+	{
+		playersArray = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in playersArray) 
+		{
+			int ownerID = player.gameObject.GetComponent<HarpoonDetector>().ownerID;
+			if (!playersDict.ContainsKey(ownerID))
+			{
+				playersDict.Add (ownerID, player.transform);
+			}
+		}
+	}
+
+	void OnNetworkPlayerJoin (Player player)
+	{
+		Debug.Log (player.name);
+		AddPlayersToDict ();
+	}
+
+//	[RFC(20)] 
 
 //	[RCC(255)]
 //	static GameObject OnCreate (GameObject prefab, Vector3 pos, Quaternion rot, Vector2 moveToPos)

@@ -157,7 +157,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e2b6f081d508450b87aeaf09bf53c8e, type: 3}
   m_Name: 
@@ -200,12 +200,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83827d268772f4009b361ac13baec873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatesPerSecond: 1
+  updatesPerSecond: 4
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

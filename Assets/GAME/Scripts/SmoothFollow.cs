@@ -12,14 +12,10 @@ public class SmoothFollow : MonoBehaviour {
 	bool isReady;
 	float thisOldPosX, thisOldPosY, targetOldPosX, targetOldPosY; 
 
-	void Awake ()
-	{
-		thisTransform = transform;
-	}
-	
 	void Start ()
 	{
-		Invoke("Ready",1f);
+		thisTransform = transform;
+		Invoke("Ready",0.05f);
 	}
 
 	void Ready ()

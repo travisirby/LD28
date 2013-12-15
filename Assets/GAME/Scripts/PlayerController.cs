@@ -32,11 +32,6 @@ using System.Collections;
 		public MovementProperties movementProps;
 		public JumpProperties jumpProps;
 
-		private Transform groundCasts;
-
-		public LayerMask groundLayers;						// These layers will be included in the linecasts to test if grounded
-		public float groundLinecastLength = 1f;
-
 		private Animator animator;
 		private AnimHashIDs animHashIDs;
 		private Rigidbody2D rb2D;
@@ -55,6 +50,7 @@ using System.Collections;
 				isThisMyObject = true;
 				tnSyncPlayer = GetComponent<TNSyncPlayer>();
 			}
+			GameManager.Instance.AddPlayersToDict();
 		}
 		void Start()
 		{

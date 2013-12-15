@@ -493,7 +493,7 @@ MonoBehaviour:
   serverAddress: 162.243.11.235
   serverPort: 5127
   firstLevel: Joined
-  channelID: 5
+  channelID: 6
   disconnectLevel: Join
   allowUDP: 1
   connectOnStart: 1

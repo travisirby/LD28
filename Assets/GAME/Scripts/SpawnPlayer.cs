@@ -17,5 +17,6 @@ public class SpawnPlayer : MonoBehaviour {
 	void SpawnPlayerNow () 
 	{
 		TNManager.Create(playerPrefab, spawnPos.position, Quaternion.identity, false);
+		GameManager.Instance.Invoke("AddPlayersToDict", 3f);
 	}
 }
