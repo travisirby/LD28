@@ -46,11 +46,6 @@ public class HarpoonDetector : MonoBehaviour {
 				holdingHarpoon = true;
 				harpoon = col.transform;
 				harpoon.SendMessage ("SetOwner", TNManager.playerID);
-//
-//				harpoon.gameObject.layer = harpoonOwnedLayer; 
-//				harpoon.parent.transform.parent = transform;
-//				harpoon.position = transform.position;
-//				harpoon.rotation = Quaternion.identity;
 			}
 		}
 	}
@@ -63,18 +58,13 @@ public class HarpoonDetector : MonoBehaviour {
 		{
 			if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
 			{
-				if (col.rigidbody2D.velocity.magnitude > 0.1f)
+				if (col.rigidbody2D.velocity.magnitude > 0.5f)
 				{
 					return;
 				}
 				holdingHarpoon = true;
 				harpoon = col.transform;
 				harpoon.SendMessage ("SetOwner", TNManager.playerID);
-				
-				harpoon.gameObject.layer = harpoonOwnedLayer; 
-				harpoon.parent.transform.parent = transform;
-				harpoon.position = transform.position;
-				harpoon.rotation = Quaternion.identity;
 			}
 		}
 	}
