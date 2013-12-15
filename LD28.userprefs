@@ -1,18 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/HarpoonThrow.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TNet/Client/TNSyncHarpoon.cs">
     <Files>
-      <File FileName="Assets/TNet/Client/TNSyncRigidbody2D.cs" Line="100" Column="2" />
+      <File FileName="Assets/TNet/Client/TNSyncHarpoon.cs" Line="62" Column="95" />
       <File FileName="../game-off-2013/Assets/Scripts/Text_Restart.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="20" Column="51" />
-      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="34" Column="1" />
-      <File FileName="Assets/TNet/ReadMe - 1.8.4.txt" Line="45" Column="18" />
-      <File FileName="Assets/GAME/Scripts/SetupPlayerCam.cs" Line="17" Column="55" />
+      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/TNet/ReadMe - 1.8.4.txt" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/SetupPlayerCam.cs" Line="1" Column="1" />
       <File FileName="Assets/GAME/Scripts/HarpoonSpawn.cs" Line="28" Column="31" />
-      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="176" Column="4" />
-      <File FileName="Assets/HarpoonDetector.cs" Line="56" Column="3" />
-      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="24" Column="67" />
-      <File FileName="Assets/GAME/Scripts/SmoothFollow.cs" Line="15" Column="12" />
+      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="13" Column="24" />
+      <File FileName="Assets/HarpoonDetector.cs" Line="49" Column="3" />
+      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/SmoothFollow.cs" Line="1" Column="1" />
+      <File FileName="Assets/ParticlePauseOnStart.cs" Line="9" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

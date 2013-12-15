@@ -13,6 +13,8 @@ TagManager:
   - 
   - 
   - 
+  - PlayerBody
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -26,7 +28,7 @@ TagManager:
   User Layer 10: PlayerTrigger
   User Layer 11: HarpoonFree
   User Layer 12: HarpoonOwned
-  User Layer 13: 
+  User Layer 13: OriginCollider
   User Layer 14: 
   User Layer 15: 
   User Layer 16: 

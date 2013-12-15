@@ -46,11 +46,11 @@ public class HarpoonDetector : MonoBehaviour {
 				holdingHarpoon = true;
 				harpoon = col.transform;
 				harpoon.SendMessage ("SetOwner", TNManager.playerID);
-
-				harpoon.gameObject.layer = harpoonOwnedLayer; 
-				harpoon.parent.transform.parent = transform;
-				harpoon.position = transform.position;
-				harpoon.rotation = Quaternion.identity;
+//
+//				harpoon.gameObject.layer = harpoonOwnedLayer; 
+//				harpoon.parent.transform.parent = transform;
+//				harpoon.position = transform.position;
+//				harpoon.rotation = Quaternion.identity;
 			}
 		}
 	}

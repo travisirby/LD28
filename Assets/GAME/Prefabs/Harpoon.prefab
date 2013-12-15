@@ -10,10 +10,9 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 212: {fileID: 21200000}
-  - 61: {fileID: 6100002}
   m_Layer: 11
   m_Name: Renderer
-  m_TagString: Harpoon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +33,7 @@ GameObject:
   - 114: {fileID: 11400006}
   m_Layer: 11
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Harpoon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,19 +120,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .2103405, y: 4.68299389}
-  m_Center: {x: .512485147, y: .0429487228}
---- !u!61 &6100002
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 6, y: 2}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1.23795366, y: 4.03909206}
+  m_Center: {x: -.00394904613, y: .0429487228}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteFollow: {fileID: 11400000}
-  harpoonForce: 200
+  harpoonForce: 180
   harpoonFreeLayer: 11
   harpoonOwnedLayer: 12
 --- !u!114 &11400004
@@ -185,10 +173,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83827d268772f4009b361ac13baec873, type: 3}
+  m_Script: {fileID: 11500000, guid: ec7ca154d2c9146cb830fe3dee8f1db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatesPerSecond: 4
+  updatesPerSecond: 2
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

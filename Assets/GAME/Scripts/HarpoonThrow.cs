@@ -10,14 +10,17 @@ public class HarpoonThrow : TNBehaviour {
 	public int harpoonFreeLayer = 11;
 	public int harpoonOwnedLayer = 12;
 
+	[System.NonSerialized]
+	public int ownerID;
+
 	private bool isReady, isThisMyObject, throwingHarpoon, owned;
-	private TNSyncRigidbody2D tnSync;
-	private int ownerID;
+	private TNSyncHarpoon tnSync;
+
 	private Transform ownerTrans;
 
 	void Awake()
 	{
-		tnSync = GetComponent<TNSyncRigidbody2D>();
+		tnSync = GetComponent<TNSyncHarpoon>();
 		tnSync.enabled = false;
 
 		if (TNManager.isThisMyObject)
@@ -42,6 +45,15 @@ public class HarpoonThrow : TNBehaviour {
 		ownerID = id;
 		owned = true;
 		tnSync.enabled = false;	// Turn off TNSyncrigidbody2d because we are now parented to the player
+
+		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
+	
+		
+		gameObject.layer = harpoonOwnedLayer;
+		transform.parent.transform.parent = ownerTrans;
+		transform.position = ownerTrans.position;
+		transform.rotation = Quaternion.identity;
+
 		SetOwnerRemoteRFC();
 	}
 
@@ -88,39 +100,42 @@ public class HarpoonThrow : TNBehaviour {
 	
 	void ThrowHarpoon () 
 	{
+
 		throwingHarpoon = true;
 		owned = false;
-		Invoke ("ResetThrowingHarpoon", 3f);
+		Invoke ("ResetThrowingHarpoon", 0.5f);
 		
-	//	spriteFollow.enabled = true;
-		tnSync.enabled = true;
+
 		
 		transform.parent.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);  // Receiver: HarpoonDetector on Player->Sprite
 		transform.parent.transform.parent = null;
 		gameObject.layer = harpoonFreeLayer;
 		
 		Vector3 mousePos = Input.mousePosition;
-		mousePos.z = 10f; //The distance from the camera to the player object
-		Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-		lookPos = lookPos - transform.position;
+		//mousePos.z = 15f; //The distance from the camera to the player object
+		Ray ray = Camera.main.ScreenPointToRay(mousePos);
+		Vector3 rayPos = ray.origin+(ray.direction*15f);
+		Vector3 lookPos = rayPos - transform.position;
 		float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
 		Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
 		transform.rotation = rot;
 		
-		Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector3 clickDistance = mouseWorldPos - transform.position;
+		//Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Vector3 clickDistance = rayPos - transform.position;
 		Vector2 force = clickDistance.normalized * harpoonForce;
 		rigidbody2D.AddForce(force);
-
+		Debug.Log (harpoonForce);
+		//	spriteFollow.enabled = true;
+		tnSync.enabled = true;
 		tno.Send(56, Target.OthersSaved, force, transform.localEulerAngles);
-		
+
 	}
 
 	[RFC(56)]
-	void ThrowHarpoonRemote (Vector2 force, Vector3 rot) 
+	void ThrowHarpoonRemote (Vector2 pos, Vector3 rot) 
 	{
-//		throwingHarpoon = true;
-//		Invoke ("ResetThrowingHarpoon", 3f);
+		throwingHarpoon = true;
+		Invoke ("ResetThrowingHarpoon", 0.5f);
 		
 	//	spriteFollow.enabled = true;
 		tnSync.enabled = true;
@@ -134,6 +149,7 @@ public class HarpoonThrow : TNBehaviour {
 
 		gameObject.layer = harpoonFreeLayer;
 
+		transform.position = pos;
 		transform.localEulerAngles = rot;
 
 		//rigidbody2D.AddForce( force * harpoonForce);
@@ -144,7 +160,28 @@ public class HarpoonThrow : TNBehaviour {
 
 	void OnCollisionEnter2D (Collision2D col)
 	{
-		rigidbody2D.velocity = Vector2.zero;
+		Debug.Log ("playerid"+TNManager.playerID+" ownerID:" + ownerID+"throwingHarpoon"+throwingHarpoon);
+		if (TNManager.playerID == ownerID && !throwingHarpoon) 
+		{
+			Debug.Log ("stopped");
+			rigidbody2D.velocity = Vector2.zero;
+		//	rigidbody2D.Sleep();
+
+			tno.Send(56, Target.OthersSaved, transform.position, transform.localEulerAngles);
+		}
+	}
+
+	void OnCollisionStay2D (Collision2D col)
+	{
+		Debug.Log ("playerid"+TNManager.playerID+" ownerID:" + ownerID+"throwingHarpoon"+throwingHarpoon);
+		if (TNManager.playerID == ownerID && !throwingHarpoon) 
+		{
+			Debug.Log ("stopped");
+			rigidbody2D.velocity = Vector2.zero;
+		//	rigidbody2D.Sleep();
+			
+			tno.Send(56, Target.OthersSaved, transform.position, transform.localEulerAngles);
+		}
 	}
 
 	void SyncHarpoon()
@@ -155,7 +192,7 @@ public class HarpoonThrow : TNBehaviour {
 		}
 		else if (TNManager.isInChannel)
 		{
-			if (tnSync.enabled = true) tnSync.enabled = false;
+			if (tnSync.enabled) tnSync.enabled = false;
 			//tno.Send(100, Target.OthersSaved, transform.position, transform.eulerAngles);
 		}
 	}
@@ -172,7 +209,7 @@ public class HarpoonThrow : TNBehaviour {
 	{
 		if (owned && ownerID == TNManager.playerID)
 		{
-			Invoke("SetOwnerRemoteRFC", 3f); 
+			Invoke("SetOwnerRemoteRFC", 1f); 
 		}
 	}
 }
