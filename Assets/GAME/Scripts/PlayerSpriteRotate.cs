@@ -4,9 +4,10 @@ using System.Collections;
 public class PlayerSpriteRotate : MonoBehaviour {
 
 	public float rotateRate;
+	public Rigidbody2D playerBody;
+
 
 	Transform thisTrans;
-	Rigidbody2D playerBody;
 	bool isReady, isMine;
 	Quaternion previousRot;
 
@@ -19,7 +20,6 @@ public class PlayerSpriteRotate : MonoBehaviour {
 		}
 
 		thisTrans = transform;
-		playerBody = GameObject.FindGameObjectWithTag("PBody").GetComponent<Rigidbody2D>();
 		Invoke("SetIsReady", 2f);
 	}
 
@@ -41,16 +41,17 @@ public class PlayerSpriteRotate : MonoBehaviour {
 
 		Quaternion rot = Quaternion.identity;
 
-//		if (Mathf.Abs (playerVelocity.normalized.x) < 0.1f)
-//		{
-//			angle = 90f;
-//			rot = Quaternion.AngleAxis(angle, Vector3.forward);
-//			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, 1f * Time.fixedDeltaTime);
-//		}
-//		else 
-//		{
+		if (Mathf.Abs (playerVelocity.magnitude) < 0.1f)
+		{
+			angle = 90f;
+			rot = Quaternion.AngleAxis(angle, Vector3.forward);
+			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, rotateRate * Time.fixedDeltaTime);
+		}
+		else 
+		{
 		 	rot = Quaternion.AngleAxis(angle, Vector3.forward);
 			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, rotateRate * Time.fixedDeltaTime);
 		}
+	}
 
 }

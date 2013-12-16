@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TrailColliderGen : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TrailColliderGen : MonoBehaviour
 	public float colliderGenFrequency = 0.5f;
 	public int trailColliderLayer = 13;
 
+	List<GameObject> edgeObjs = new List<GameObject>(10);
 	TrailRenderer trail;
 	GameObject spawnedEdge, lineWaveObj;
 	LineWave lineWave;
@@ -104,6 +106,15 @@ public class TrailColliderGen : MonoBehaviour
 		{
 			trailActivated = false;
 			//Invoke("MakeEdgeCol",0.5f);
+		}
+	}
+
+	public void DestroyTrail ()
+	{
+		CancelInvoke();
+		if (lineWaveObj == null)
+		{	
+			Destroy(lineWaveObj);
 		}
 	}
 }

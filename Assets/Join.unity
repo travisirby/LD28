@@ -460,6 +460,7 @@ GameObject:
   - 4: {fileID: 1969623812}
   - 114: {fileID: 1969623814}
   - 114: {fileID: 1969623813}
+  - 114: {fileID: 1969623815}
   m_Layer: 0
   m_Name: AutoJoin
   m_TagString: Untagged
@@ -492,7 +493,7 @@ MonoBehaviour:
   serverAddress: 162.243.11.235
   serverPort: 5127
   firstLevel: Joined
-  channelID: 98
+  channelID: 63
   disconnectLevel: Join
   allowUDP: 1
   connectOnStart: 1
@@ -512,3 +513,14 @@ MonoBehaviour:
   objects:
   - {fileID: 100000, guid: 104cc579df01248899508388ae8ad98e, type: 2}
   - {fileID: 100004, guid: 22d003500a530481f82d8726484ff2d7, type: 2}
+--- !u!114 &1969623815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1969623811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddaf5e582fb7421aac23e6c72ae8fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

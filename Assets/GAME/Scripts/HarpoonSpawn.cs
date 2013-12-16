@@ -25,6 +25,7 @@ public class HarpoonSpawn : MonoBehaviour {
 
 	void SpawnHarpoon () 
 	{
-		TNManager.Create(harpoonPrefab, transform.position, Quaternion.identity, false);
+		GameManager.Instance.CreateHarpoon(harpoonPrefab, transform.position, Quaternion.identity, TNManager.playerID, true);
+//		TNManager.Create(harpoonPrefab, transform.position, Quaternion.identity, true);
 	}
 }

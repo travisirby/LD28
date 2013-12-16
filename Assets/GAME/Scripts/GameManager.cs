@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager> {
 
 	private GameObject[] playersArray;
 
-	void Awake ()
+	void Start ()
 	{
 		AddPlayersToDict();
 	}
@@ -34,21 +34,20 @@ public class GameManager : Singleton<GameManager> {
 		Debug.Log (player.name);
 		AddPlayersToDict ();
 	}
+	
 
-//	[RFC(20)] 
+	[RCC(255)]
+	static GameObject CreateTheHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, int ownerID)
+	{
+		Debug.Log ("created2");
+		GameObject go = Instantiate(prefab, pos, rot) as GameObject;
+		go.transform.GetChild(0).gameObject.GetComponent<HarpoonThrow>().SetOwner(ownerID);
+		return go;
+	}
 
-//	[RCC(255)]
-//	static GameObject OnCreate (GameObject prefab, Vector3 pos, Quaternion rot, Vector2 moveToPos)
-//	{
-//		Debug.Log ("created");
-//		GameObject go = Instantiate(prefab, pos, rot) as GameObject;
-//		go.SendMessage("MoveToPos", moveToPos, SendMessageOptions.DontRequireReceiver);
-//		return go;
-//	}
-//
-//	public void CreateHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, Vector2 moveToPos, bool persistent = false)
-//	{
-//		TNManager.CreateEx(255, persistent, prefab, pos, rot, moveToPos);
-//		Debug.Log ("created");
-//	}
+	public void CreateHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, int ownerID, bool persistent = true)
+	{
+		TNManager.CreateEx(255, persistent, prefab, pos, rot, ownerID);
+		Debug.Log ("created");
+	}
 }

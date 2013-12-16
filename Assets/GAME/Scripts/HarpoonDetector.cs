@@ -35,7 +35,7 @@ public class HarpoonDetector : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D col)
 	{
-		if (!isThisMyObject || !isReady) return;
+		if (!isThisMyObject || !isReady) return;  // Is THIS player our object?? Does not mean the harpoon we are colliding with 
 
 		if (col.CompareTag("Harpoon"))
 		{

@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateRate: 5
+  playerBody: {fileID: 5000002}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7d0c677efbe48f984cdaa2f0f349d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatesPerSecond: 4
+  updatesPerSecond: 2
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
