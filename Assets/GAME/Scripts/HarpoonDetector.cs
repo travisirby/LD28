@@ -60,7 +60,7 @@ public class HarpoonDetector : MonoBehaviour {
 		{
 			if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
 			{
-				if (col.rigidbody2D.velocity.magnitude > 0.5f)
+				if (col.rigidbody2D.velocity.magnitude > 0.1f)
 				{
 					return;
 				}

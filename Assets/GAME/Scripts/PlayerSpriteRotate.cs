@@ -7,13 +7,19 @@ public class PlayerSpriteRotate : MonoBehaviour {
 
 	Transform thisTrans;
 	Rigidbody2D playerBody;
-	bool isReady;
+	bool isReady, isMine;
 	Quaternion previousRot;
 
-	void Start () 
+
+	void Awake ()
 	{
+		if (TNManager.isThisMyObject)
+		{
+			isMine = true;
+		}
+
 		thisTrans = transform;
-		playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Rigidbody2D>();
+		playerBody = GameObject.FindGameObjectWithTag("PBody").GetComponent<Rigidbody2D>();
 		Invoke("SetIsReady", 2f);
 	}
 
@@ -32,10 +38,6 @@ public class PlayerSpriteRotate : MonoBehaviour {
 
 
 		float angle = Mathf.Atan2 (playerVelocity.normalized.y, playerVelocity.normalized.x) * Mathf.Rad2Deg;
-	
-		Debug.Log (angle);
-		Debug.DrawLine (thisTrans.position, moveToPos, Color.red, 2f);
-		//if (angle < -40f || angle > 40f) return;
 
 		Quaternion rot = Quaternion.identity;
 
@@ -49,10 +51,6 @@ public class PlayerSpriteRotate : MonoBehaviour {
 //		{
 		 	rot = Quaternion.AngleAxis(angle, Vector3.forward);
 			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, rotateRate * Time.fixedDeltaTime);
-	//	}
+		}
 
-
-
-
-	}
 }

@@ -33,7 +33,6 @@ public class TrailColliderGen : MonoBehaviour
 
 		edgeCol = spawnedEdge.GetComponent<EdgeCollider2D>();
 		edgeCol.points = new Vector2[2] {thisTrans.position,lastDotPosition};
-		Debug.DrawLine(thisTrans.position,lastDotPosition,Color.red,5f);
 		lastDotPosition = thisTrans.position;
 	}
 	
@@ -73,14 +72,16 @@ public class TrailColliderGen : MonoBehaviour
 		{
 			return;
 		}
-		else if (!trailActivated &&lineWave.lengh > 0f)
+		else if (!trailActivated &&lineWave.lengh >= 8f)
 		{
+			lineWave.freq -= 0.01f;
 			lineWave.lengh -= 1f;
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else
 		{
 			lineWaveTrans.position = thisTrans.position;
+			lineWaveTrans.rotation = Quaternion.Lerp (lineWaveTrans.rotation, harpoonBody.rotation, Time.fixedDeltaTime * 5f);
 		}
 	}
 

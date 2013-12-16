@@ -45,10 +45,12 @@ public class HarpoonThrow : TNBehaviour {
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 
+		rigidbody2D.isKinematic = true;
+
 		gameObject.layer = harpoonOwnedLayer;
 		transform.parent.transform.parent = ownerTrans;
-		transform.position = ownerTrans.position;
-		transform.rotation = Quaternion.identity;
+		transform.position = new Vector3 (ownerTrans.position.x, ownerTrans.position.y + 1f, 0f);
+		transform.rotation = ownerTrans.localRotation;
 
 		tnSync.enabled = false;	// Turn off TNSyncrigidbody2d because we are now parented to the player
 
@@ -60,6 +62,7 @@ public class HarpoonThrow : TNBehaviour {
 	{
 		if (owned)
 		{
+
 			ownerID = id;
 			isOwned = true;
 			isStuck = false;
@@ -68,10 +71,14 @@ public class HarpoonThrow : TNBehaviour {
 
 			GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 
+			rigidbody2D.isKinematic = true;
+
 			gameObject.layer = harpoonOwnedLayer;
 			transform.parent.transform.parent = ownerTrans;
-			transform.position = ownerTrans.position;
-			transform.rotation = Quaternion.identity;
+
+			transform.position = new Vector3 (ownerTrans.position.x, ownerTrans.position.y + 1f, 0f);
+
+			transform.rotation = ownerTrans.localRotation;
 
 			tnSync.enabled = false;
 		}
@@ -85,15 +92,6 @@ public class HarpoonThrow : TNBehaviour {
 
 			if (TNManager.playerID == ownerID) ThrowHarpoon();
 		}
-	}
-
-	void FixedUpdate ()
-	{
-//		if (isOwned && ownerTrans != null) 
-//		{
-//			transform.localEulerAngles = Vector3.Lerp (transform.localEulerAngles, ownerTrans.localEulerAngles, 0.25f);
-//		}
-
 	}
 	
 	void ThrowHarpoon () 
@@ -120,6 +118,7 @@ public class HarpoonThrow : TNBehaviour {
 
 		Vector3 clickDistance = rayPos - transform.position;
 		Vector2 force = clickDistance.normalized * harpoonForce;
+		rigidbody2D.isKinematic = false;
 		rigidbody2D.AddForce(force);
 
 		tnSync.Sync();
@@ -139,14 +138,14 @@ public class HarpoonThrow : TNBehaviour {
 
 		harpoonTrail.ActivateTrail();
 
-
+		rigidbody2D.isKinematic = false;
 
 		tnSync.enabled = true;
 		
 
 		if (transform.parent.transform.parent != null)
 		{
-			transform.parent.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);  // Receiver: HarpoonDetector on Player->Sprite
+			transform.parent.transform.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);  // Receiver: HarpoonDetector on Player->Sprite
 			transform.parent.transform.parent = null;
 		}
 
