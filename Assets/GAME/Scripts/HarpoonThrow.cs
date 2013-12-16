@@ -89,10 +89,10 @@ public class HarpoonThrow : TNBehaviour {
 
 	void FixedUpdate ()
 	{
-		if (isOwned && ownerTrans != null) 
-		{
-			transform.localEulerAngles = Vector3.Lerp (transform.localEulerAngles, ownerTrans.localEulerAngles, 0.25f);
-		}
+//		if (isOwned && ownerTrans != null) 
+//		{
+//			transform.localEulerAngles = Vector3.Lerp (transform.localEulerAngles, ownerTrans.localEulerAngles, 0.25f);
+//		}
 
 	}
 	

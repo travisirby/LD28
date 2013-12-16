@@ -1,15 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/SetupPlayerCam.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/HarpoonDetector.cs">
     <Files>
-      <File FileName="Assets/LineWaves/LineWave.cs" Line="49" Column="3" />
-      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="104" Column="27" />
-      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="31" Column="7" />
-      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="16" Column="22" />
-      <File FileName="Assets/GAME/Scripts/HarpoonSpawn.cs" Line="18" Column="7" />
-      <File FileName="Assets/GAME/Scripts/ParticlePauseOnStart.cs" Line="7" Column="7" />
-      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="59" Column="68" />
+      <File FileName="Assets/LineWaves/LineWave.cs" Line="34" Column="19" />
+      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="100" Column="5" />
+      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="24" Column="1" />
+      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="10" Column="44" />
+      <File FileName="Assets/GAME/Scripts/HarpoonSpawn.cs" Line="22" Column="19" />
+      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="78" Column="38" />
       <File FileName="Assets/GAME/Scripts/SetupPlayerCam.cs" Line="18" Column="1" />
+      <File FileName="Assets/GAME/Scripts/TrailEdgeCol.cs" Line="13" Column="11" />
+      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="27" Column="1" />
+      <File FileName="Assets/GAME/Scripts/HarpoonDetector.cs" Line="13" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

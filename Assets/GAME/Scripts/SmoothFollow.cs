@@ -47,7 +47,7 @@ public class SmoothFollow : MonoBehaviour {
 
 			if (smoothRotate)
 			{
-				transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, Time.deltaTime * rotationSpeed);
+				transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, Time.fixedDeltaTime * rotationSpeed);
 			}
 		}
 	}

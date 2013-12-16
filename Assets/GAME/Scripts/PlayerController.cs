@@ -81,8 +81,8 @@ public class PlayerController : MonoBehaviour
 
 	public void Jump(float jumpForceY)
 	{
-		rb2D.velocity = new Vector2 (rb2D.velocity.x, 0f);
-
+//		rb2D.velocity = new Vector2 (rb2D.velocity.x, 0f);
+//
 		float xForce = 0f;
 
 		if (Mathf.Abs (hInput) > 0.1f) xForce = hInput * moveProps.jumpForceX;
