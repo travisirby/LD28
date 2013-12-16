@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager> {
 
 	private GameObject[] playersArray;
 
-	void Start ()
+	void Awake ()
 	{
 		AddPlayersToDict();
 	}

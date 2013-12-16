@@ -93,7 +93,6 @@ public class TrailColliderGen : MonoBehaviour
 			//lineWaveTrans.rotation = Quaternion.Inverse(lineWaveTrans.rotation);
 			//trailActivated = false;
 			Invoke("MakeEdgeCol",0.5f);
-
 		}
 	}
 

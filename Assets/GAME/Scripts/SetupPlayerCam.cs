@@ -15,7 +15,6 @@ public class SetupPlayerCam : MonoBehaviour {
 		if (isThisMyObject)
 		{
 			Camera.main.SendMessage("SetupPlayerCam", transform);
-			Debug.Log ("SetupCam");
 		}
 	}
 }

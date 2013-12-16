@@ -41,11 +41,11 @@ public class HarpoonThrow : TNBehaviour {
 		ownerID = id;
 		owned = true;
 		isStuck = false;
+
 		harpoonTrail.HideTrail();
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
-	
-		
+
 		gameObject.layer = harpoonOwnedLayer;
 		transform.parent.transform.parent = ownerTrans;
 		transform.position = ownerTrans.position;
@@ -53,24 +53,18 @@ public class HarpoonThrow : TNBehaviour {
 
 		tnSync.enabled = false;	// Turn off TNSyncrigidbody2d because we are now parented to the player
 
-		SetOwnerRemoteRFC();
-	}
-
-	void SetOwnerRemoteRFC() 
-	{
-		Debug.Log(ownerID);
-		if(tno == null) Debug.Log("yup");
 		tno.Send(60, Target.OthersSaved, ownerID);
 	}
-
+	
 	[RFC(60)]
 	void SetOwnerRemote (int id)
 	{
 		ownerID = id;
 		owned = true;
 		isStuck = false;
+	
+		Debug.Log ("hiding");
 		harpoonTrail.HideTrail();
-
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 
@@ -184,7 +178,7 @@ public class HarpoonThrow : TNBehaviour {
 			tnSync.enabled = false;
 			if (TNManager.playerID == ownerID)
 			{
-				tno.Send(57, Target.OthersSaved, transform.position, transform.localEulerAngles);
+				tno.Send(57, Target.Others, transform.position, transform.localEulerAngles);
 			}
 			
 		}
@@ -209,7 +203,7 @@ public class HarpoonThrow : TNBehaviour {
 			tnSync.enabled = false;
 			if (TNManager.playerID == ownerID)
 			{
-				tno.Send(57, Target.OthersSaved, transform.position, transform.localEulerAngles);
+				tno.Send(57, Target.Others, transform.position, transform.localEulerAngles);
 			}
 			
 		}
@@ -225,11 +219,4 @@ public class HarpoonThrow : TNBehaviour {
 		transform.rotation = Quaternion.Euler(rot);
 	}
 
-//	void OnNetworkPlayerJoin (Player player)
-//	{
-//		if (owned && ownerID == TNManager.playerID)
-//		{
-//			Invoke("SetOwnerRemoteRFC", 3f); 
-//		}
-//	}
 }
