@@ -7,7 +7,8 @@ Assets/HOTween
 Assets/HOTween.meta
 Assets/PlayModePersist
 Assets/PlayModePersist.meta
-
+Assets/LineWaves
+Assets/LineWaves.meta
 *.csproj
 *.unityproj
 *.sln

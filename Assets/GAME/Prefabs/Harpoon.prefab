@@ -163,7 +163,7 @@ TrailRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e216e84b21e044300bc93f793ca8a3b5, type: 2}
+  - {fileID: 2100000, guid: a8e0a6a0f4f1b4c849dedfaa54e01520, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -172,8 +172,8 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Time: 2
-  m_StartWidth: 1
+  m_Time: 5
+  m_StartWidth: .5
   m_EndWidth: .100000001
   m_Colors:
     m_Color[0]:
@@ -187,10 +187,10 @@ TrailRenderer:
       rgba: 4278190335
     m_Color[3]:
       serializedVersion: 2
-      rgba: 2499805439
+      rgba: 4278190335
     m_Color[4]:
       serializedVersion: 2
-      rgba: 754974975
+      rgba: 4278190335
   m_MinVertexDistance: .100000001
   m_Autodestruct: 0
 --- !u!114 &11400000
@@ -272,8 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6995d7e3f9f4f6982f34aa638a958b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edgeColPrefab: {fileID: 100000, guid: efa4d52dd08e447eca1126d021456b0d, type: 2}
   trailTime: 5
-  colliderGenFrequency: .5
+  colliderGenFrequency: .25
   trailColliderLayer: 13
 --- !u!212 &21200000
 SpriteRenderer:

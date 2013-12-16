@@ -41,7 +41,7 @@ public class HarpoonThrow : TNBehaviour {
 		ownerID = id;
 		owned = true;
 		isStuck = false;
-		harpoonTrail.DeActivateTrail();
+		harpoonTrail.HideTrail();
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 	
@@ -69,7 +69,7 @@ public class HarpoonThrow : TNBehaviour {
 		ownerID = id;
 		owned = true;
 		isStuck = false;
-		harpoonTrail.DeActivateTrail();
+		harpoonTrail.HideTrail();
 
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);

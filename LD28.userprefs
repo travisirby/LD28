@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/TrailColliderGen.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/VectrosityDemos/Scripts/DrawLines/DrawLinesMouse.js">
     <Files>
-      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="13" Column="23" />
+      <File FileName="Assets/VectrosityDemos/Scripts/DrawLines/DrawLinesMouse.js" Line="26" Column="23" />
+      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="39" Column="23" />
       <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/HarpoonDetector.cs" Line="21" Column="1" />
-      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="13" Column="23" />
-      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="145" Column="32" />
+      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/TrailEdgeCol.cs" Line="6" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
