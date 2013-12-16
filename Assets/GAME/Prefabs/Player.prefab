@@ -368,9 +368,9 @@ MonoBehaviour:
   movementProps:
     moveSpeed: 1200
     airMoveSpeed: 500
-    maxSpeedXGround: 12
-    maxSpeedXAir: 12
-    maxSpeedY: 12
+    maxSpeedXGround: 15
+    maxSpeedXAir: 15
+    maxSpeedY: 15
     movingPlatformFriction: 7.69999981
     slopeClimbForce: 50
     slopeLimit: .800000012

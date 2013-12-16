@@ -1,19 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/HarpoonThrow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GAME/Scripts/TrailColliderGen.cs">
     <Files>
-      <File FileName="Assets/TNet/Client/TNSyncHarpoon.cs" Line="91" Column="36" />
-      <File FileName="../game-off-2013/Assets/Scripts/Text_Restart.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/TNet/ReadMe - 1.8.4.txt" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SetupPlayerCam.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/HarpoonSpawn.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="181" Column="5" />
-      <File FileName="Assets/HarpoonDetector.cs" Line="1" Column="1" />
+      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="13" Column="23" />
       <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SmoothFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/ParticlePauseOnStart.cs" Line="1" Column="1" />
+      <File FileName="Assets/HarpoonDetector.cs" Line="21" Column="1" />
+      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="13" Column="23" />
+      <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="145" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

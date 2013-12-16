@@ -18,7 +18,6 @@ public class HarpoonDetector : MonoBehaviour {
 			isThisMyObject = true;
 		}
 		ownerID = TNManager.objectOwnerID;
-		Debug.Log (ownerID);
 	}
 	
 

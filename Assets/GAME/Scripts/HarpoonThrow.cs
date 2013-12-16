@@ -4,8 +4,7 @@ using TNet;
 
 public class HarpoonThrow : TNBehaviour {
 
-	public SmoothFollow spriteFollow;
-	
+	public TrailColliderGen harpoonTrail;
 	public float harpoonForce = 200;
 	public int harpoonFreeLayer = 11;
 	public int harpoonOwnedLayer = 12;
@@ -32,18 +31,17 @@ public class HarpoonThrow : TNBehaviour {
 	void Start ()
 	{
 		Invoke("SetIsReady",2f);
-//		Invoke("DisableSpriteFollow",2f);
 	}
-
+	
 	void SetIsReady () { isReady = true; }
 
-	void DisableSpriteFollow () { spriteFollow.enabled = false; }
 
 	void SetOwner (int id) // Sender: HarpoonDetector on Player->Sprite
 	{
 		ownerID = id;
 		owned = true;
 		isStuck = false;
+		harpoonTrail.DeActivateTrail();
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 	
@@ -60,20 +58,21 @@ public class HarpoonThrow : TNBehaviour {
 
 	void SetOwnerRemoteRFC() 
 	{
-		tno.Send(55, Target.Others, ownerID);
+		Debug.Log(ownerID);
+		if(tno == null) Debug.Log("yup");
+		tno.Send(60, Target.OthersSaved, ownerID);
 	}
 
-	[RFC(55)]
+	[RFC(60)]
 	void SetOwnerRemote (int id)
 	{
-//		Debug.Log("SETUP");
 		ownerID = id;
 		owned = true;
 		isStuck = false;
+		harpoonTrail.DeActivateTrail();
+
 
 		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
-
-	//	spriteFollow.enabled = false;
 
 		gameObject.layer = harpoonOwnedLayer;
 		transform.parent.transform.parent = ownerTrans;
@@ -81,12 +80,14 @@ public class HarpoonThrow : TNBehaviour {
 		transform.rotation = Quaternion.identity;
 
 		tnSync.enabled = false;
-
-		//		spriteFollow.transform.rotation = Quaternion.identity;
 	}
 	
 	void Update ()
 	{
+		if (!isReady)
+		{
+			return;
+		}
 		if (transform.parent.transform.parent == null || gameObject.layer == harpoonFreeLayer)
 		{
 			return;
@@ -97,7 +98,7 @@ public class HarpoonThrow : TNBehaviour {
 			return;
 		}
 
-		if(Input.GetMouseButtonDown(0) && isReady && !throwingHarpoon)
+		if(Input.GetMouseButtonDown(0) && !throwingHarpoon)
 		{
 			ThrowHarpoon();
 		}
@@ -109,7 +110,10 @@ public class HarpoonThrow : TNBehaviour {
 		throwingHarpoon = true;
 		owned = false;
 		Invoke ("ResetThrowingHarpoon", 0.5f);
-		
+
+		harpoonTrail.ActivateTrail();
+
+
 		transform.parent.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);  // Receiver: HarpoonDetector on Player->Sprite
 		transform.parent.transform.parent = null;
 		gameObject.layer = harpoonFreeLayer;
@@ -131,7 +135,6 @@ public class HarpoonThrow : TNBehaviour {
 
 		tnSync.Sync();
 
-		//	spriteFollow.enabled = true;
 		tno.Send(56, Target.OthersSaved, transform.position, transform.localEulerAngles);
 
 	}
@@ -141,8 +144,10 @@ public class HarpoonThrow : TNBehaviour {
 	{
 		throwingHarpoon = true;
 		Invoke ("ResetThrowingHarpoon", 0.5f);
-		
-	//	spriteFollow.enabled = true;
+
+		harpoonTrail.ActivateTrail();
+
+
 		transform.position = pos;
 		transform.localEulerAngles = rot;
 		tnSync.enabled = true;
@@ -156,9 +161,7 @@ public class HarpoonThrow : TNBehaviour {
 
 		gameObject.layer = harpoonFreeLayer;
 
-
 		//rigidbody2D.AddForce( force * harpoonForce);
-
 	}
 
 	void ResetThrowingHarpoon () { throwingHarpoon = false; }
@@ -173,6 +176,10 @@ public class HarpoonThrow : TNBehaviour {
 		if (gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
+
+			harpoonTrail.DeActivateTrail();
+
+
 			rigidbody2D.velocity = Vector2.zero;
 			tnSync.enabled = false;
 			if (TNManager.playerID == ownerID)
@@ -194,6 +201,10 @@ public class HarpoonThrow : TNBehaviour {
 		if (gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
+
+			harpoonTrail.DeActivateTrail();
+
+
 			rigidbody2D.velocity = Vector2.zero;
 			tnSync.enabled = false;
 			if (TNManager.playerID == ownerID)
@@ -214,11 +225,11 @@ public class HarpoonThrow : TNBehaviour {
 		transform.rotation = Quaternion.Euler(rot);
 	}
 
-	void OnNetworkPlayerJoin (Player player)
-	{
-		if (owned && ownerID == TNManager.playerID)
-		{
-			Invoke("SetOwnerRemoteRFC", 3f); 
-		}
-	}
+//	void OnNetworkPlayerJoin (Player player)
+//	{
+//		if (owned && ownerID == TNManager.playerID)
+//		{
+//			Invoke("SetOwnerRemoteRFC", 3f); 
+//		}
+//	}
 }
