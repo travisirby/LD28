@@ -6,15 +6,22 @@ public class TrailColliderGen : MonoBehaviour
 {
 	public GameObject edgeColPrefab;
 	public GameObject lineWavePrefab;
+
+	public float maxTrailLength = 100f;
+
 	public Transform harpoonBody;
 	public float trailTime = 5f;
 	public float colliderGenFrequency = 0.5f;
 	public int trailColliderLayer = 13;
 
+	[System.NonSerialized]
+	public LineWave lineWave;
+	[System.NonSerialized]
+	public GameObject lineWaveObj;
+
 	List<GameObject> edgeObjs = new List<GameObject>(10);
-	TrailRenderer trail;
-	GameObject spawnedEdge, lineWaveObj;
-	LineWave lineWave;
+
+	GameObject spawnedEdge;
 	EdgeCollider2D edgeCol;
 	Vector3 lastDotPosition, lineWaveStartPos;
 	bool trailActivated;
@@ -22,25 +29,42 @@ public class TrailColliderGen : MonoBehaviour
 
 	void Awake()
 	{
-	//	trail = GetComponent<TrailRenderer>();
-	//	trail.time = trailTime;
 		thisTrans = transform;
+
+		lineWaveObj = Instantiate (lineWavePrefab, lineWaveStartPos, harpoonBody.rotation ) as GameObject;
+		lineWaveTrans = lineWaveObj.transform;
+		lineWave = lineWaveObj.GetComponent<LineWave>();
+
+
+	}
+
+	void Start ()
+	{
+		if (lineWaveTrans != null)
+		{
+			lineWaveTrans.parent = harpoonBody.parent;
+		}
+
+		else 
+		{
+			Invoke("Start",1f);
+		}
 	}
 
 	void MakeEdgeCol()
 	{
-		if (lastDotPosition == thisTrans.position) return;
-
-		spawnedEdge = Instantiate (edgeColPrefab) as GameObject;
-
-		edgeCol = spawnedEdge.GetComponent<EdgeCollider2D>();
-		edgeCol.points = new Vector2[2] {thisTrans.position,lastDotPosition};
-		lastDotPosition = thisTrans.position;
+//		if (lastDotPosition == thisTrans.position) return;
+//
+//		spawnedEdge = Instantiate (edgeColPrefab) as GameObject;
+//
+//		edgeCol = spawnedEdge.GetComponent<EdgeCollider2D>();
+//		edgeCol.points = new Vector2[2] {thisTrans.position,lastDotPosition};
+//		lastDotPosition = thisTrans.position;
 	}
 	
 	public void ActivateTrail ()
 	{
-		lineWaveStartPos = harpoonBody.position;
+		lineWaveStartPos = thisTrans.position;
 		if (lineWaveObj == null)
 		{
 			lineWaveObj = Instantiate (lineWavePrefab, lineWaveStartPos, harpoonBody.rotation ) as GameObject;
@@ -67,17 +91,16 @@ public class TrailColliderGen : MonoBehaviour
 		if (trailActivated)
 		{
 			lineWaveTrans.rotation = harpoonBody.rotation;
-			lineWave.lengh = Vector3.Distance (thisTrans.position, lineWaveStartPos);
+			if (lineWave.lengh < 50) lineWave.lengh = Vector3.Distance (thisTrans.position, lineWaveStartPos);
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else if (lineWaveObj == null) 
 		{
 			return;
 		}
-		else if (!trailActivated &&lineWave.lengh >= 8f)
+		else if (!trailActivated && lineWave.lengh > 0f)
 		{
-			lineWave.freq -= 0.01f;
-			lineWave.lengh -= 1f;
+			lineWave.lengh -= 2f;
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else
@@ -87,10 +110,19 @@ public class TrailColliderGen : MonoBehaviour
 		}
 	}
 
+	public void SetLengh (float length)
+	{
+		if (lineWave != null) 
+		{
+			lineWave.lengh = length;
+		}
+	}
 
-	public void DeActivateTrail()
+
+	public void FreezeTrail()
 	{
 		CancelInvoke();
+
 		if (trailActivated)
 		{
 			//lineWaveTrans.rotation = Quaternion.Inverse(lineWaveTrans.rotation);
@@ -99,22 +131,14 @@ public class TrailColliderGen : MonoBehaviour
 		}
 	}
 
-	public void HideTrail ()
-	{		
+	public void CollapseTrail ()
+	{
 		CancelInvoke();
+
 		if (trailActivated)
 		{
 			trailActivated = false;
 			//Invoke("MakeEdgeCol",0.5f);
-		}
-	}
-
-	public void DestroyTrail ()
-	{
-		CancelInvoke();
-		if (lineWaveObj == null)
-		{	
-			Destroy(lineWaveObj);
 		}
 	}
 }

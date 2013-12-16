@@ -9,16 +9,27 @@ public class GameManager : Singleton<GameManager> {
 
 	public Dictionary<int, Transform> playersDict = new Dictionary<int, Transform>();
 
-	private GameObject[] playersArray;
+	GameObject[] playersArray;
+	bool addPlayersRunning;
 
 	void Start ()
 	{
-		AddPlayersToDict();
+		StartAddPlayersToDict();
 	}
 
-	public void AddPlayersToDict ()
+	public void StartAddPlayersToDict ()
 	{
+		if (!addPlayersRunning)
+		{
+			StartCoroutine("AddPlayersToDict");
+		}
+	}
+
+	IEnumerator AddPlayersToDict ()
+	{
+		addPlayersRunning = true;
 		playersArray = GameObject.FindGameObjectsWithTag("Player");
+		playersDict.Clear();
 		foreach (GameObject player in playersArray) 
 		{
 			int ownerID = player.gameObject.GetComponent<HarpoonDetector>().ownerID;
@@ -26,16 +37,27 @@ public class GameManager : Singleton<GameManager> {
 			{
 				playersDict.Add (ownerID, player.transform);
 			}
-		}
-	}
+			Debug.Log("InCoLoop");
 
+			yield return null;
+		}
+		Debug.Log("DoneCo");
+
+		addPlayersRunning = false;
+	}
+	
 	void OnNetworkPlayerJoin (Player player)
 	{
 		Debug.Log (player.name);
-		AddPlayersToDict ();
+		StartAddPlayersToDict();
+	}
+
+	void OnNetworkPlayerLeave (Player player)
+	{
+		StartAddPlayersToDict();
 	}
 	
-
+	
 	[RCC(255)]
 	static GameObject CreateTheHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, int ownerID)
 	{

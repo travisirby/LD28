@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class SetupPlayerCam : MonoBehaviour {
-
-	private bool isThisMyObject;
+	
+	bool isThisMyObject;
 
 	void Awake () 
 	{
@@ -15,6 +15,7 @@ public class SetupPlayerCam : MonoBehaviour {
 		if (isThisMyObject)
 		{
 			Camera.main.SendMessage("SetupPlayerCam", transform);
+			Camera.main.SendMessage("SetupPlayerRigidbody", rigidbody2D);
 		}
 	}
 }

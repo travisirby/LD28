@@ -42,16 +42,16 @@ MonoBehaviour:
   origin: 0
   size: 100
   lengh: 0
-  freq: 5
-  amp: 1
+  freq: 10
+  amp: .200000003
   ampByFreq: 0
   centered: 0
   centCrest: 0
-  warp: 1
+  warp: 0
   warpInvert: 0
   warpRandom: 0
   walkManual: 0
-  walkAuto: 10
+  walkAuto: 25
   spiral: 1
 --- !u!120 &12000000
 LineRenderer:
@@ -78,11 +78,11 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: .100000001
+    startWidth: .100000001
+    endWidth: 1
     m_StartColor:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 3523215359
     m_EndColor:
       serializedVersion: 2
       rgba: 4294967295

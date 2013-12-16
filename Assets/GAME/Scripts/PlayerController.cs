@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 		{
 			isThisMyObject = true;
 		}
-		GameManager.Instance.AddPlayersToDict();
+		// GameManager.Instance.AddPlayersToDict();
 		rb2D = rigidbody2D;	
 	}
 
@@ -110,6 +110,5 @@ public class PlayerController : MonoBehaviour
 		{
 			rb2D.velocity = newVelocity;
 		}
-		
 	}
 }

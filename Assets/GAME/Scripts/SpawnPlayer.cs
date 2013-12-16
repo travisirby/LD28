@@ -24,6 +24,6 @@ public class SpawnPlayer : MonoBehaviour {
 		Vector3 spawnPos = new Vector3 (transform.position.x+randomX, transform.position.y+randomY, 0f);
 
 		TNManager.Create(playerPrefab, spawnPos, Quaternion.identity, false);
-		GameManager.Instance.Invoke("AddPlayersToDict", 3f);
+		GameManager.Instance.Invoke("AddPlayersToDict", 1f);  // CHANGED FROM 3f
 	}
 }

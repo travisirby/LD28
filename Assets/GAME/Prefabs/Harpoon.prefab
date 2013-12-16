@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.39870858, y: 0, z: 0}
+  m_LocalPosition: {x: -2.1058116, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   harpoonTrail: {fileID: 11400010}
   harpoonForce: 300
+  blowBackForce: 100
   harpoonFreeLayer: 11
   harpoonOwnedLayer: 12
 --- !u!114 &11400004
@@ -231,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeColPrefab: {fileID: 100000, guid: efa4d52dd08e447eca1126d021456b0d, type: 2}
   lineWavePrefab: {fileID: 100000, guid: 7d8fde42b4ca24192ac1dbb5caf77fac, type: 2}
+  maxTrailLength: 100
   harpoonBody: {fileID: 400006}
   trailTime: 5
   colliderGenFrequency: .25

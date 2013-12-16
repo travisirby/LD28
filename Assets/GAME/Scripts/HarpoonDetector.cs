@@ -7,9 +7,10 @@ public class HarpoonDetector : MonoBehaviour {
 
 	[System.NonSerialized]
 	public int ownerID;
+	[System.NonSerialized]
+	public bool isThisMyObject;
 
-	private bool isThisMyObject, isReady, holdingHarpoon, throwingHarpoon;
-	private Transform harpoon;
+	bool isReady, holdingHarpoon, throwingHarpoon;
 
 	void Awake()
 	{
@@ -46,15 +47,14 @@ public class HarpoonDetector : MonoBehaviour {
 					return;
 				}
 				holdingHarpoon = true;
-				harpoon = col.transform;
-				harpoon.SendMessage ("SetOwner", TNManager.playerID);
+				col.transform.SendMessage ("SetOwner", TNManager.playerID);
 			}
 		}
 	}
 
 	void OnTriggerStay2D (Collider2D col)
 	{
-		if (!isThisMyObject || !isReady) return;
+		if (!isThisMyObject || !isReady) return;  // Is THIS player our object?? Does not mean the harpoon we are colliding with 
 		
 		if (col.CompareTag("Harpoon"))
 		{
@@ -65,11 +65,19 @@ public class HarpoonDetector : MonoBehaviour {
 					return;
 				}
 				holdingHarpoon = true;
-				harpoon = col.transform;
-				harpoon.SendMessage ("SetOwner", TNManager.playerID);
+				col.transform.SendMessage ("SetOwner", TNManager.playerID);
 			}
 		}
 	}
 
-
+//	[RFC(36)]
+//	void OnSync (Vector3 pos, Vector3 rot, Vector2 vel)
+//	{
+//		
+//	}
+//
+//	void OnNetworkPlayerJoin (Player player)
+//	{
+//		tno.Send(36, Target.Others, mLastPos, mLastRot, mRb.velocity);
+//	}
 }
