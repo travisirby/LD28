@@ -102,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.12580252, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
   - {fileID: 400000}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   harpoonTrail: {fileID: 11400010}
-  harpoonForce: 200
+  harpoonForce: 300
   harpoonFreeLayer: 11
   harpoonOwnedLayer: 12
 --- !u!114 &11400004

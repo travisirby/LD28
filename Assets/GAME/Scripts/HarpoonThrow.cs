@@ -12,8 +12,8 @@ public class HarpoonThrow : TNBehaviour {
 	[System.NonSerialized]
 	public int ownerID;
 
-	private bool isReady, isThisMyObject, throwingHarpoon, owned, isStuck;
-	private TNSyncHarpoon tnSync;
+	bool isReady, isOwned, isThisMyObject, throwingHarpoon, isStuck;
+	TNSyncHarpoon tnSync;
 
 	private Transform ownerTrans;
 
@@ -35,11 +35,10 @@ public class HarpoonThrow : TNBehaviour {
 	
 	void SetIsReady () { isReady = true; }
 
-
 	void SetOwner (int id) // Sender: HarpoonDetector on Player->Sprite
 	{
 		ownerID = id;
-		owned = true;
+		isOwned = true;
 		isStuck = false;
 
 		harpoonTrail.HideTrail();
@@ -53,60 +52,56 @@ public class HarpoonThrow : TNBehaviour {
 
 		tnSync.enabled = false;	// Turn off TNSyncrigidbody2d because we are now parented to the player
 
-		tno.Send(60, Target.OthersSaved, ownerID);
+		tno.Send(60, Target.OthersSaved, ownerID, true);
 	}
 	
 	[RFC(60)]
-	void SetOwnerRemote (int id)
+	void SetOwnerRemote (int id, bool owned)
 	{
-		ownerID = id;
-		owned = true;
-		isStuck = false;
-	
-		Debug.Log ("hiding");
-		harpoonTrail.HideTrail();
+		if (owned)
+		{
+			ownerID = id;
+			isOwned = true;
+			isStuck = false;
+		
+			harpoonTrail.HideTrail();
 
-		GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
+			GameManager.Instance.playersDict.TryGetValue(id, out ownerTrans);
 
-		gameObject.layer = harpoonOwnedLayer;
-		transform.parent.transform.parent = ownerTrans;
-		transform.position = ownerTrans.position;
-		transform.rotation = Quaternion.identity;
+			gameObject.layer = harpoonOwnedLayer;
+			transform.parent.transform.parent = ownerTrans;
+			transform.position = ownerTrans.position;
+			transform.rotation = Quaternion.identity;
 
-		tnSync.enabled = false;
+			tnSync.enabled = false;
+		}
 	}
 	
 	void Update ()
 	{
-		if (!isReady)
-		{
-			return;
-		}
-		if (transform.parent.transform.parent == null || gameObject.layer == harpoonFreeLayer)
-		{
-			return;
-		}
-
-		if (TNManager.playerID != ownerID)
-		{
-			return;
-		}
-
 		if(Input.GetMouseButtonDown(0) && !throwingHarpoon)
 		{
-			ThrowHarpoon();
+			if (!isReady || gameObject.layer == harpoonFreeLayer ||transform.parent.parent == null) return;
+
+			if (TNManager.playerID == ownerID) ThrowHarpoon();
 		}
+	}
+
+	void FixedUpdate ()
+	{
+		if (isOwned && ownerTrans != null) 
+		{
+			transform.localEulerAngles = Vector3.Lerp (transform.localEulerAngles, ownerTrans.localEulerAngles, 0.25f);
+		}
+
 	}
 	
 	void ThrowHarpoon () 
 	{
-
 		throwingHarpoon = true;
-		owned = false;
 		Invoke ("ResetThrowingHarpoon", 0.5f);
 
 		harpoonTrail.ActivateTrail();
-
 
 		transform.parent.parent.SendMessage ("ThrewHarpoon", SendMessageOptions.DontRequireReceiver);  // Receiver: HarpoonDetector on Player->Sprite
 		transform.parent.transform.parent = null;
@@ -130,7 +125,7 @@ public class HarpoonThrow : TNBehaviour {
 		tnSync.Sync();
 
 		tno.Send(56, Target.OthersSaved, transform.position, transform.localEulerAngles);
-
+		tno.Send(60, Target.OthersSaved, 0, false);		// Here I'm clearing the saved rfc that thinks the harpoon is still owned
 	}
 
 	[RFC(56)]
@@ -139,11 +134,13 @@ public class HarpoonThrow : TNBehaviour {
 		throwingHarpoon = true;
 		Invoke ("ResetThrowingHarpoon", 0.5f);
 
+		transform.position = pos;
+		transform.localEulerAngles = rot;
+
 		harpoonTrail.ActivateTrail();
 
 
-		transform.position = pos;
-		transform.localEulerAngles = rot;
+
 		tnSync.enabled = true;
 		
 
@@ -155,7 +152,6 @@ public class HarpoonThrow : TNBehaviour {
 
 		gameObject.layer = harpoonFreeLayer;
 
-		//rigidbody2D.AddForce( force * harpoonForce);
 	}
 
 	void ResetThrowingHarpoon () { throwingHarpoon = false; }
@@ -173,9 +169,9 @@ public class HarpoonThrow : TNBehaviour {
 
 			harpoonTrail.DeActivateTrail();
 
-
 			rigidbody2D.velocity = Vector2.zero;
 			tnSync.enabled = false;
+
 			if (TNManager.playerID == ownerID)
 			{
 				tno.Send(57, Target.Others, transform.position, transform.localEulerAngles);

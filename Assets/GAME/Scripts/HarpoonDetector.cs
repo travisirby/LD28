@@ -8,7 +8,7 @@ public class HarpoonDetector : MonoBehaviour {
 	[System.NonSerialized]
 	public int ownerID;
 
-	private bool isThisMyObject, holdingHarpoon, throwingHarpoon;
+	private bool isThisMyObject, isReady, holdingHarpoon, throwingHarpoon;
 	private Transform harpoon;
 
 	void Awake()
@@ -18,7 +18,10 @@ public class HarpoonDetector : MonoBehaviour {
 			isThisMyObject = true;
 		}
 		ownerID = TNManager.objectOwnerID;
+		Invoke("SetIsReady", 2f);
 	}
+
+	void SetIsReady () { isReady = true; }
 	
 
 	void ThrewHarpoon ()			// Sender is HarpoonThrower
@@ -32,7 +35,7 @@ public class HarpoonDetector : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D col)
 	{
-		if (!isThisMyObject) return;
+		if (!isThisMyObject || !isReady) return;
 
 		if (col.CompareTag("Harpoon"))
 		{
@@ -51,7 +54,7 @@ public class HarpoonDetector : MonoBehaviour {
 
 	void OnTriggerStay2D (Collider2D col)
 	{
-		if (!isThisMyObject) return;
+		if (!isThisMyObject || !isReady) return;
 		
 		if (col.CompareTag("Harpoon"))
 		{

@@ -365,23 +365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ed9b0bbefceb347b9986898b936b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementProps:
-    moveSpeed: 1200
-    airMoveSpeed: 500
-    maxSpeedXGround: 15
-    maxSpeedXAir: 15
-    maxSpeedY: 15
-    movingPlatformFriction: 7.69999981
-    slopeClimbForce: 50
-    slopeLimit: .800000012
-  jumpProps:
-    jumpForce: {x: 0, y: 600}
-    jumpLeniancy: .170000002
-    landingSlideAmount: 20
-    landingSlideYForce: 20
-    jumpInputStrength: 2
-    angledJumpYAddedForce: 250
-    jumpCheckTime: .5
+  moveProps:
+    moveSpeed: 1800
+    maxSpeedX: 22
+    maxSpeedY: 22
+    jumpForceX: 2
+    jumpForceY: 1000
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

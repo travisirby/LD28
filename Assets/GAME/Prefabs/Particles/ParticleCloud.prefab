@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
-  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: ParticleCloud
   m_TagString: Untagged
@@ -24,22 +23,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .0152485082, y: 0, z: 0, w: .999883831}
-  m_LocalPosition: {x: -69.0981903, y: 20.7562866, z: -.805221558}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalRotation: {x: .0668092519, y: 0, z: 0, w: .997765779}
+  m_LocalPosition: {x: 14.726387, y: 93.0862122, z: 4.07442284}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1883d5b301a54badaab17487de5046a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -90,7 +78,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .100000001
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -211,13 +199,13 @@ ParticleSystem:
         m_NumAlphaKeys: 2
       minColor:
         serializedVersion: 2
-        rgba: 4292868351
+        rgba: 4294964476
       maxColor:
         serializedVersion: 2
         rgba: 4294967295
       minMaxState: 2
     startSize:
-      scalar: 1000
+      scalar: 200
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -232,7 +220,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0

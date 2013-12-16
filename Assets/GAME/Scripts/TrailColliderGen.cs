@@ -61,7 +61,7 @@ public class TrailColliderGen : MonoBehaviour
 	}
 
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (trailActivated)
 		{
