@@ -26,6 +26,7 @@ public class PlayerSpriteRotate : MonoBehaviour {
 		Vector3 playerVelocity = playerBody.velocity;
 
 
+
 		Vector2 moveToPos = transform.position + (playerVelocity);
 
 
@@ -35,12 +36,20 @@ public class PlayerSpriteRotate : MonoBehaviour {
 		Debug.Log (angle);
 		Debug.DrawLine (thisTrans.position, moveToPos, Color.red, 2f);
 		//if (angle < -40f || angle > 40f) return;
-	
-		Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
 
+		Quaternion rot = Quaternion.identity;
 
-		thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, rotateRate * Time.fixedDeltaTime);
-		
+//		if (Mathf.Abs (playerVelocity.normalized.x) < 0.1f)
+//		{
+//			angle = 90f;
+//			rot = Quaternion.AngleAxis(angle, Vector3.forward);
+//			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, 1f * Time.fixedDeltaTime);
+//		}
+//		else 
+//		{
+		 	rot = Quaternion.AngleAxis(angle, Vector3.forward);
+			thisTrans.rotation = Quaternion.Lerp (thisTrans.localRotation, rot, rotateRate * Time.fixedDeltaTime);
+	//	}
 
 
 
