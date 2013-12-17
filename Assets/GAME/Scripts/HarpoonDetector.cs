@@ -10,7 +10,7 @@ public class HarpoonDetector : MonoBehaviour {
 	[System.NonSerialized]
 	public bool isThisMyObject;
 
-	bool isReady, holdingHarpoon, throwingHarpoon;
+	bool isReady, holdingHarpoon = true, throwingHarpoon;
 
 	void Awake()
 	{
@@ -41,6 +41,7 @@ public class HarpoonDetector : MonoBehaviour {
 		int trailColliderLayer = 13;
 		if (col.gameObject.layer == trailColliderLayer)
 		{
+
 			transform.parent.BroadcastMessage("Die",SendMessageOptions.DontRequireReceiver);
 		}
 
@@ -76,10 +77,6 @@ public class HarpoonDetector : MonoBehaviour {
 		}
 	}
 
-	void Die ()
-	{
-
-	}
 
 //	[RFC(36)]
 //	void OnSync (Vector3 pos, Vector3 rot, Vector2 vel)

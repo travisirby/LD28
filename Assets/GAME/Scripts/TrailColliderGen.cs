@@ -11,7 +11,7 @@ public class TrailColliderGen : MonoBehaviour
 
 	public Transform harpoonBody;
 	public float trailTime = 5f;
-	public float colliderGenFrequency = 0.5f;
+	public float colliderGenFrequency = 0.3f;
 	public int trailColliderLayer = 13;
 
 	[System.NonSerialized]
@@ -140,7 +140,11 @@ public class TrailColliderGen : MonoBehaviour
 			yield return null;
 			i++;
 		}
-
+		//harpoonBody.parent.BroadcastMessage("NowColorRed",SendMessageOptions.DontRequireReceiver);
+		foreach (GameObject edgeCol in edgeObjs)
+		{
+			edgeCol.layer = 13;
+		}
 	}
 
 	public IEnumerator ColorLerpToBlue ()
@@ -154,6 +158,8 @@ public class TrailColliderGen : MonoBehaviour
 			yield return null;
 			i++;
 		}
+		//harpoonBody.parent.BroadcastMessage("NowColorBlue",SendMessageOptions.DontRequireReceiver);
+
 	}
 	
 	public void SetLengh (float length)
@@ -173,7 +179,7 @@ public class TrailColliderGen : MonoBehaviour
 		{
 			//lineWaveTrans.rotation = Quaternion.Inverse(lineWaveTrans.rotation);
 			//trailActivated = false;
-			Invoke("MakeEdgeCol",0.5f);
+			Invoke("MakeEdgeCol",0.1f);
 		}
 	}
 
