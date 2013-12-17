@@ -7,7 +7,7 @@ public class TrailEdgeCol : MonoBehaviour {
 
 	void Start () 
 	{
-		Invoke("DestroyThis", edgeLifetime);
+		//Invoke("DestroyThis", edgeLifetime);
 	}
 	
 	void DestroyThis ()

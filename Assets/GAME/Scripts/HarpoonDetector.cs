@@ -38,7 +38,13 @@ public class HarpoonDetector : MonoBehaviour {
 	{
 		if (!isThisMyObject || !isReady) return;  // Is THIS player our object?? Does not mean the harpoon we are colliding with 
 
-		if (col.CompareTag("Harpoon"))
+		int trailColliderLayer = 13;
+		if (col.gameObject.layer == trailColliderLayer)
+		{
+			transform.parent.BroadcastMessage("Die",SendMessageOptions.DontRequireReceiver);
+		}
+
+		else if (col.CompareTag("Harpoon"))
 		{
 			if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
 			{
@@ -68,6 +74,11 @@ public class HarpoonDetector : MonoBehaviour {
 				col.transform.SendMessage ("SetOwner", TNManager.playerID);
 			}
 		}
+	}
+
+	void Die ()
+	{
+
 	}
 
 //	[RFC(36)]

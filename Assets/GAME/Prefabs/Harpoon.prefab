@@ -138,7 +138,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeColPrefab: {fileID: 100000, guid: efa4d52dd08e447eca1126d021456b0d, type: 2}
   lineWavePrefab: {fileID: 100000, guid: 7d8fde42b4ca24192ac1dbb5caf77fac, type: 2}
-  maxTrailLength: 100
+  maxTrailLength: 140
   harpoonBody: {fileID: 400006}
   trailTime: 5
   colliderGenFrequency: .25

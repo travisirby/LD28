@@ -43,7 +43,7 @@ MonoBehaviour:
   size: 100
   lengh: 0
   freq: 10
-  amp: .200000003
+  amp: 1
   ampByFreq: 0
   centered: 0
   centCrest: 0
@@ -78,11 +78,11 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: .100000001
-    endWidth: 1
+    startWidth: .5
+    endWidth: .5
     m_StartColor:
       serializedVersion: 2
-      rgba: 3523215359
+      rgba: 4294967295
     m_EndColor:
       serializedVersion: 2
       rgba: 4294967295

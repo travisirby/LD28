@@ -21,6 +21,7 @@ public class TrailColliderGen : MonoBehaviour
 
 	List<GameObject> edgeObjs = new List<GameObject>(10);
 
+	Material lineWaveMat;
 	GameObject spawnedEdge;
 	EdgeCollider2D edgeCol;
 	Vector3 lastDotPosition, lineWaveStartPos;
@@ -34,7 +35,7 @@ public class TrailColliderGen : MonoBehaviour
 		lineWaveObj = Instantiate (lineWavePrefab, lineWaveStartPos, harpoonBody.rotation ) as GameObject;
 		lineWaveTrans = lineWaveObj.transform;
 		lineWave = lineWaveObj.GetComponent<LineWave>();
-
+		lineWaveMat = lineWaveObj.renderer.material;
 
 	}
 
@@ -53,13 +54,15 @@ public class TrailColliderGen : MonoBehaviour
 
 	void MakeEdgeCol()
 	{
-//		if (lastDotPosition == thisTrans.position) return;
-//
-//		spawnedEdge = Instantiate (edgeColPrefab) as GameObject;
-//
-//		edgeCol = spawnedEdge.GetComponent<EdgeCollider2D>();
-//		edgeCol.points = new Vector2[2] {thisTrans.position,lastDotPosition};
-//		lastDotPosition = thisTrans.position;
+		if (lastDotPosition == thisTrans.position) return;
+
+		spawnedEdge = Instantiate (edgeColPrefab) as GameObject;
+
+		edgeObjs.Add (spawnedEdge);
+
+		edgeCol = spawnedEdge.GetComponent<EdgeCollider2D>();
+		edgeCol.points = new Vector2[2] {thisTrans.position,lastDotPosition};
+		lastDotPosition = thisTrans.position;
 	}
 	
 	public void ActivateTrail ()
@@ -91,25 +94,68 @@ public class TrailColliderGen : MonoBehaviour
 		if (trailActivated)
 		{
 			lineWaveTrans.rotation = harpoonBody.rotation;
-			if (lineWave.lengh < 50) lineWave.lengh = Vector3.Distance (thisTrans.position, lineWaveStartPos);
+			if (lineWave.lengh < maxTrailLength) lineWave.lengh = Vector3.Distance (thisTrans.position, lineWaveStartPos);
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else if (lineWaveObj == null) 
 		{
 			return;
 		}
-		else if (!trailActivated && lineWave.lengh > 0f)
+		else if (!trailActivated && lineWave.lengh > 3f)
 		{
 			lineWave.lengh -= 2f;
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else
 		{
+
 			lineWaveTrans.position = thisTrans.position;
-			lineWaveTrans.rotation = Quaternion.Lerp (lineWaveTrans.rotation, harpoonBody.rotation, Time.fixedDeltaTime * 5f);
+			Vector3 eulerAngle = harpoonBody.localEulerAngles;
+			eulerAngle = new Vector3 (0f,0f,-eulerAngle.z);
+
+			Vector3 lineWaveEuler = harpoonBody.localEulerAngles;
+			lineWaveEuler = new Vector3 (0f, 0f, -lineWaveEuler.z + 180f);
+			lineWaveTrans.localEulerAngles = Vector3.Lerp (lineWaveTrans.localEulerAngles, lineWaveEuler, 1f * Time.fixedDeltaTime);
 		}
 	}
+	
 
+	void DestroyEdges ()
+	{
+		foreach (GameObject obj in edgeObjs)
+		{
+			Destroy(obj);
+		}
+		edgeObjs.Clear();
+	}
+
+	public IEnumerator ColorLerpToRed ()
+	{
+		float cLerp = 0f;
+		int i = 0;
+		while (i < 50)
+		{
+			cLerp = Time.deltaTime * 2f;
+			lineWaveMat.SetColor("_TintColor", Color.Lerp(lineWaveMat.GetColor("_TintColor"), Color.red, Time.deltaTime *2f));
+			yield return null;
+			i++;
+		}
+
+	}
+
+	public IEnumerator ColorLerpToBlue ()
+	{
+		float cLerp = 0f;
+		int i = 0;
+		while (i < 50)
+		{
+			cLerp = Time.deltaTime * 2f;
+			lineWaveMat.SetColor("_TintColor", Color.Lerp(lineWaveMat.GetColor("_TintColor"), Color.blue, Time.deltaTime *2f));
+			yield return null;
+			i++;
+		}
+	}
+	
 	public void SetLengh (float length)
 	{
 		if (lineWave != null) 
@@ -134,6 +180,8 @@ public class TrailColliderGen : MonoBehaviour
 	public void CollapseTrail ()
 	{
 		CancelInvoke();
+
+		DestroyEdges();
 
 		if (trailActivated)
 		{

@@ -56,6 +56,8 @@ public class HarpoonThrow : TNBehaviour {
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.isKinematic = true;
 
+		harpoonTrail.StartCoroutine("ColorLerpToBlue");
+
 		gameObject.layer = harpoonOwnedLayer;
 		transform.parent.transform.parent = ownerTrans;
 		transform.position = new Vector3 (ownerTrans.position.x, ownerTrans.position.y + 1f, 0f);
@@ -88,6 +90,8 @@ public class HarpoonThrow : TNBehaviour {
 			Invoke("SetOwnerRemoteRetry", 0.5f);
 			return;
 		}
+
+		harpoonTrail.StartCoroutine("ColorLerpToBlue");
 
 		rigidbody2D.isKinematic = true;
 
@@ -187,7 +191,7 @@ public class HarpoonThrow : TNBehaviour {
 			Debug.Log ("hit player trigger");
 			return;
 		}
-		if (gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
+		if (col.gameObject.layer == 8 && gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
 
@@ -199,6 +203,8 @@ public class HarpoonThrow : TNBehaviour {
 			if (TNManager.playerID == ownerID)
 			{
 				tno.Send(57, Target.Others, transform.position, harpoonTrail.lineWave.lengh, true);
+				harpoonTrail.StartCoroutine("ColorLerpToRed");
+				
 			}
 			
 		}
@@ -212,7 +218,7 @@ public class HarpoonThrow : TNBehaviour {
 			Debug.Log ("hit player trigger");
 			return;
 		}
-		if (gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
+		if (col.gameObject.layer == 8 && gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
 
@@ -224,6 +230,8 @@ public class HarpoonThrow : TNBehaviour {
 			if (TNManager.playerID == ownerID)
 			{
 				tno.Send(57, Target.Others, transform.position, harpoonTrail.lineWave.lengh, true);
+				harpoonTrail.StartCoroutine("ColorLerpToRed");
+
 			}
 			
 		}
@@ -238,6 +246,7 @@ public class HarpoonThrow : TNBehaviour {
 			tnSync.enabled = false;
 			transform.position = pos;
 			harpoonTrail.SetLengh (trailLength);
+			harpoonTrail.StartCoroutine("ColorLerpToRed");
 		}
 	}
 
@@ -267,9 +276,8 @@ public class HarpoonThrow : TNBehaviour {
 		if (player.id == ownerID)
 		{
 			Debug.Log (player.id + "IM IN");
-//			harpoonTrail.DestroyTrail();
 			TNManager.Destroy(transform.parent.gameObject);
-//	
+
 		}
 	}
 
