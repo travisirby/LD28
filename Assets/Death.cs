@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TNet;
 
 public class Death : TNBehaviour {
 
@@ -42,16 +43,40 @@ public class Death : TNBehaviour {
 		camSmoothFollow.enabled = false;
 		Invoke("Respawn", respawnTime);
 		isReady = false;
+		tno.Send(116, Target.Others, transform.position);
+
 	}
 
 	void Respawn ()
 	{
-
-		transform.position = spawner.GetRandomSpawnPoint();
+		isReady = false;
 		sprite.SetActive (true);
 		rigidbody2D.isKinematic = false;
 		playerController.enabled = true;
 		camSmoothFollow.enabled = true;
+		Invoke("SetIsReady", invincibleTime);
+
+	}
+
+
+
+	[RFC(116)]
+	void DieRemote (Vector3 pos) 
+	{
+		Instantiate (deathParticle, transform.position, Quaternion.identity);
+
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.isKinematic = true;
+		GameManager.Instance.PlaySoundDie();
+		sprite.SetActive (false);
+	}
+
+
+	[RFC(117)]
+	void RespawnRemote () 
+	{
+		sprite.SetActive (true);
+		rigidbody2D.isKinematic = false;
 		Invoke("SetIsReady", invincibleTime);
 	}
 }

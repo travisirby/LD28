@@ -33,6 +33,10 @@ public class GameManager : Singleton<GameManager> {
 
 	public void PlaySoundLaser()				// Text_Typewriter calls this during typing effect
 	{
+
+
+		audioLaser.pitch += Random.Range(-0.2f,0.1f);
+
 		audioLaser.Play ();
 	}
 	public void PlaySoundDie()				// Text_Typewriter calls this during typing effect

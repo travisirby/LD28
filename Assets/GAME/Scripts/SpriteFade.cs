@@ -19,7 +19,7 @@ public class SpriteFade : MonoBehaviour {
 		isReady = true;
 		doneFlash = false;
 		stopFlash = false;
-		Invoke("StopFlash",10f);
+		Invoke("StopFlash", flashTime);
 	}
 
 	void StopFlash ()

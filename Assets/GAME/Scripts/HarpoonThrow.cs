@@ -11,6 +11,8 @@ public class HarpoonThrow : TNBehaviour {
 
 	[System.NonSerialized]
 	public int ownerID;
+	[System.NonSerialized]
+	public bool isStuckDelayed;
 
 	bool isReady, isOwned, isThisMyObject, throwingHarpoon, isStuck;
 	TNSyncHarpoon tnSync;
@@ -41,6 +43,7 @@ public class HarpoonThrow : TNBehaviour {
 		ownerID = id;
 		isOwned = true;
 		isStuck = false;
+		isStuckDelayed = false;
 
 		harpoonTrail.CollapseTrail();
 
@@ -78,6 +81,8 @@ public class HarpoonThrow : TNBehaviour {
 		Debug.Log (TNManager.playerID);
 		ownerID = id;
 		isStuck = false;
+		isStuckDelayed = false;
+
 	
 		harpoonTrail.CollapseTrail();
 
@@ -225,7 +230,7 @@ public class HarpoonThrow : TNBehaviour {
 		if (col.gameObject.layer == 8 && gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
-
+			Invoke("isStuckDelayed",1f);
 			harpoonTrail.FreezeTrail();
 
 
@@ -240,6 +245,8 @@ public class HarpoonThrow : TNBehaviour {
 			
 		}
 	}
+
+	void SetIsStuckDelayed () { isStuckDelayed = true; }
 	
 	[RFC(57)]
 	void HarpoonStuck (Vector3 pos, float trailLength, bool isStuck)

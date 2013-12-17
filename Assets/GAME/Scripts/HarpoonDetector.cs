@@ -29,7 +29,7 @@ public class HarpoonDetector : MonoBehaviour {
 	{
 		holdingHarpoon = false;
 		throwingHarpoon = true;
-		Invoke ("ResetThrowingHarpoon", 3f);
+		Invoke ("ResetThrowingHarpoon", 0.5f);
 	}
 
 	void ResetThrowingHarpoon () { throwingHarpoon = false; }
@@ -62,19 +62,28 @@ public class HarpoonDetector : MonoBehaviour {
 	void OnTriggerStay2D (Collider2D col)
 	{
 		if (!isThisMyObject || !isReady) return;  // Is THIS player our object?? Does not mean the harpoon we are colliding with 
-		
-		if (col.CompareTag("Harpoon"))
+
+
+		if (!col.CompareTag("Harpoon")) return;
+
+		HarpoonThrow colHarpoon = col.gameObject.GetComponent<HarpoonThrow>();
+
+		if (!colHarpoon.isStuckDelayed)
 		{
-			if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
-			{
-				if (col.rigidbody2D.velocity.magnitude > 0.1f)
-				{
-					return;
-				}
-				holdingHarpoon = true;
-				col.transform.SendMessage ("SetOwner", TNManager.playerID);
-			}
+			if (throwingHarpoon && colHarpoon.ownerID == ownerID) return;
+
+			transform.parent.BroadcastMessage("Die",SendMessageOptions.DontRequireReceiver);
 		}
+		else if (!holdingHarpoon && !throwingHarpoon && col.gameObject.layer != harpoonOwnedLayer)
+		{
+			if (col.rigidbody2D.velocity.magnitude > 0.1f)
+			{
+				transform.parent.BroadcastMessage("Die",SendMessageOptions.DontRequireReceiver);
+			}
+			holdingHarpoon = true;
+			col.transform.SendMessage ("SetOwner", TNManager.playerID);
+		}
+
 	}
 
 
