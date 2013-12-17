@@ -33,6 +33,9 @@ public class Death : TNBehaviour {
 		Instantiate (deathParticle, transform.position, Quaternion.identity);
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.isKinematic = true;
+
+		GameManager.Instance.PlaySoundDie();
+
 		sprite.SetActive (false);
 		transform.position = spawner.GetRandomSpawnPoint();
 		playerController.enabled = false;

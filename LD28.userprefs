@@ -1,21 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TNet/Client/TNAutoJoin.cs">
     <Files>
-      <File FileName="Assets/Death.cs" Line="32" Column="26" />
+      <File FileName="Assets/Death.cs" Line="36" Column="28" />
       <File FileName="Assets/GAME/Scripts/HarpoonThrow.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="36" Column="1" />
+      <File FileName="Assets/GAME/Scripts/GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets/GAME/Scripts/HarpoonSpawn.cs" Line="1" Column="1" />
       <File FileName="Assets/GAME/Scripts/TrailEdgeCol.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/HarpoonDetector.cs" Line="13" Column="37" />
-      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="1" Column="1" />
-      <File FileName="Assets/TNet/ReadMe - 1.8.4.txt" Line="1" Column="1" />
-      <File FileName="Assets/TNet/Client/TNAutoJoin.cs" Line="51" Column="13" />
-      <File FileName="Assets/LineWaves/LineWave.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SmoothFollowPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SetupPlayerCam.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/SpawnPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets/GAME/Scripts/CameraFade.cs" Line="215" Column="2" />
+      <File FileName="Assets/GAME/Scripts/HarpoonDetector.cs" Line="78" Column="3" />
+      <File FileName="Assets/GAME/Scripts/TrailColliderGen.cs" Line="146" Column="23" />
+      <File FileName="Assets/TNet/Client/TNAutoJoin.cs" Line="74" Column="6" />
+      <File FileName="Assets/GAME/Scripts/SpriteFade.cs" Line="21" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

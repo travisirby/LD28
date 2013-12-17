@@ -9,12 +9,18 @@ public class GameManager : Singleton<GameManager> {
 
 	public Dictionary<int, Transform> playersDict = new Dictionary<int, Transform>();
 
+	public AudioSource audioLaser;				// Text_Typewriter calls this during typing effect
+	public AudioSource audioDie;			
+
 	GameObject[] playersArray;
 	bool addPlayersRunning;
 
 	void Start ()
 	{
 		StartAddPlayersToDict();
+		AudioSource[] aSources = GetComponents<AudioSource>();
+		audioLaser = aSources[0];
+		audioDie = aSources[1];
 	}
 
 	public void StartAddPlayersToDict ()
@@ -25,6 +31,14 @@ public class GameManager : Singleton<GameManager> {
 		}
 	}
 
+	public void PlaySoundLaser()				// Text_Typewriter calls this during typing effect
+	{
+		audioLaser.Play ();
+	}
+	public void PlaySoundDie()				// Text_Typewriter calls this during typing effect
+	{
+		audioDie.Play();
+	}
 	IEnumerator AddPlayersToDict ()
 	{
 		addPlayersRunning = true;

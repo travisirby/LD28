@@ -136,7 +136,9 @@ public class HarpoonThrow : TNBehaviour {
 		float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
 		Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
 		transform.rotation = rot;
-		
+
+		GameManager.Instance.PlaySoundLaser();
+
 		tnSync.enabled = true;
 
 		Vector3 clickDistance = rayPos - transform.position;
@@ -164,6 +166,8 @@ public class HarpoonThrow : TNBehaviour {
 
 		transform.position = pos;
 		transform.localEulerAngles = rot;
+
+		GameManager.Instance.PlaySoundLaser();
 
 		harpoonTrail.ActivateTrail();
 
