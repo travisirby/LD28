@@ -55,11 +55,9 @@ public class GameManager : Singleton<GameManager> {
 			{
 				playersDict.Add (ownerID, player.transform);
 			}
-			Debug.Log("InCoLoop");
 
 			yield return null;
 		}
-		Debug.Log("DoneCo");
 
 		addPlayersRunning = false;
 	}
@@ -79,7 +77,6 @@ public class GameManager : Singleton<GameManager> {
 	[RCC(255)]
 	static GameObject CreateTheHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, int ownerID)
 	{
-		Debug.Log ("created2");
 		GameObject go = Instantiate(prefab, pos, rot) as GameObject;
 		go.transform.GetChild(0).gameObject.GetComponent<HarpoonThrow>().SetOwner(ownerID);
 		return go;
@@ -88,6 +85,5 @@ public class GameManager : Singleton<GameManager> {
 	public void CreateHarpoon (GameObject prefab, Vector3 pos, Quaternion rot, int ownerID, bool persistent = true)
 	{
 		TNManager.CreateEx(255, persistent, prefab, pos, rot, ownerID);
-		Debug.Log ("created");
 	}
 }

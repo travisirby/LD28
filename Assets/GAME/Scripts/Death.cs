@@ -55,7 +55,7 @@ public class Death : TNBehaviour {
 		playerController.enabled = true;
 		camSmoothFollow.enabled = true;
 		Invoke("SetIsReady", invincibleTime);
-
+		tno.Send(117, Target.Others);
 	}
 
 

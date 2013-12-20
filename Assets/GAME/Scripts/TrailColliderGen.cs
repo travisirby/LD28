@@ -82,12 +82,14 @@ public class TrailColliderGen : MonoBehaviour
 			lineWaveTrans.rotation = harpoonBody.rotation;
 		}
 		
-		lastDotPosition = thisTrans.position;
-		InvokeRepeating("MakeEdgeCol", 0.1f, colliderGenFrequency);
+		//lastDotPosition = thisTrans.position;
+		Invoke("SetInitialDotPosition", colliderGenFrequency - 0.1f);
+		InvokeRepeating("MakeEdgeCol", colliderGenFrequency, colliderGenFrequency);
 		
 		trailActivated = true;
 	}
 
+	void SetInitialDotPosition () { lastDotPosition = thisTrans.position; }
 
 	void FixedUpdate()
 	{
@@ -101,14 +103,14 @@ public class TrailColliderGen : MonoBehaviour
 		{
 			return;
 		}
-		else if (!trailActivated && lineWave.lengh > 3f)
+		else if (!trailActivated && lineWave.lengh > 0f)
 		{
 			lineWave.lengh -= 2f;
 			lineWaveTrans.position = Vector3.Lerp (lineWaveTrans.position, thisTrans.position, 0.25f);
 		}
 		else
 		{
-
+			lineWave.lengh = 0f;
 			lineWaveTrans.position = thisTrans.position;
 			Vector3 eulerAngle = harpoonBody.localEulerAngles;
 			eulerAngle = new Vector3 (0f,0f,-eulerAngle.z);
@@ -118,7 +120,6 @@ public class TrailColliderGen : MonoBehaviour
 			lineWaveTrans.localEulerAngles = Vector3.Lerp (lineWaveTrans.localEulerAngles, lineWaveEuler, 1f * Time.fixedDeltaTime);
 		}
 	}
-	
 
 	void DestroyEdges ()
 	{

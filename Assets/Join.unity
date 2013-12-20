@@ -1900,7 +1900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92616b00e51854e96de75670d4fad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: 162.243.11.235
+  connectText: {fileID: 1059080040}
+  serverAddress: 127.0.0.1
   serverPort: 5127
   firstLevel: Joined
   channelID: 63

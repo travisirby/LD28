@@ -230,7 +230,7 @@ public class HarpoonThrow : TNBehaviour {
 		if (col.gameObject.layer == 8 && gameObject.layer == harpoonFreeLayer && !throwingHarpoon && !isStuck) 
 		{
 			isStuck = true;
-			Invoke("isStuckDelayed",1f);
+			Invoke("SetIsStuckDelayed",1f);
 			harpoonTrail.FreezeTrail();
 
 
